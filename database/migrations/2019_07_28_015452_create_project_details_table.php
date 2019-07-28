@@ -14,7 +14,7 @@ class CreateProjectDetailsTable extends Migration
     public function up()
     {
         Schema::create('project_details', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->integer('project_id');
             $table->integer('component_id');
             $table->integer('material_id');
