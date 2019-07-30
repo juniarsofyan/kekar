@@ -16,5 +16,5 @@ Route::get('/', function () {
 });
 
 Route::resource('/category', 'CategoryController')->except([
-    'create', 'show'
+    'show'
 ]);

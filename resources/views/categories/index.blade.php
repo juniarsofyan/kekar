@@ -20,55 +20,8 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            <!-- left column -->
-            <div class="col-md-4">
-                <!-- general form elements -->
-                <div class="box box-primary">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Tambah Kategori</h3>
-                    </div>
-                    <!-- /.box-header -->
-
-                    <!-- form start -->
-                    <form role="form" action="{{ route('category.store') }}" method="POST">
-                        @csrf
-                        <div class="box-body">
-
-                            {{-- IF SOMETHING WRONG HAPPENED --}}
-                            @if (session('error'))
-                                @alert(['type' => 'danger'])
-                                    {!! session('error') !!}
-                                @endalert
-                            @endif
-
-                            <div class="form-group">
-                                <label for="category_name">Nama</label>
-                                <input type="text" name="category_name"
-                                    class="form-control {{ $errors->has('category_name') ? 'is-invalid':'' }}"
-                                    id="category_name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="description">Deskripsi</label>
-                                <textarea name="description" id="description"
-                                    class="form-control {{ $errors->has('description') ? 'is-invalid':'' }}" cols="5"
-                                    rows="5"></textarea>
-                            </div>
-                        </div>
-                        <!-- /.box-body -->
-
-                        <div class="box-footer">
-                            <button type="reset" class="btn btn-default">Cancel</button> &nbsp;&nbsp;
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </form>
-                </div>
-                <!-- /.box -->
-
-            </div>
-            <!--/.col (left) -->
-
             <!-- right column -->
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="box">
                     <div class="box-header">
                         <h3 class="box-title">List Kategori</h3>
