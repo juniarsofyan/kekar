@@ -18,3 +18,11 @@ Route::get('/', function () {
 Route::resource('/category', 'CategoryController')->except([
     'show'
 ]);
+
+Route::resource('/component', 'ComponentController')->except([
+    'show'
+]);
+
+Route::resource('/customer', 'CustomerController')->except([
+    'show'
+]);
