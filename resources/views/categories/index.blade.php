@@ -75,6 +75,13 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
+
+                        @if (session('success'))
+                            @alert(['type' => 'success'])
+                                {!! session('success') !!}
+                            @endalert
+                        @endif
+
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
