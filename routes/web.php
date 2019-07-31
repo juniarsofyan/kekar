@@ -30,3 +30,7 @@ Route::resource('/customer', 'CustomerController')->except([
 Route::resource('/inventory', 'InventoryController')->except([
     'show'
 ]);
+
+Route::resource('/material', 'MaterialController')->except([
+    'show'
+]);

@@ -110,7 +110,7 @@
                 </ul>
             </li>
 
-            {{-- <li class="treeview {{ (request()->routeIs('material*')) ? 'active' : '' }}" >
+            <li class="treeview {{ (request()->routeIs('material*')) ? 'active' : '' }}" >
                 <a href="#">
                     <span>Jenis Material</span>
                     <span class="pull-right-container">
@@ -122,7 +122,7 @@
                     <li class="{{ (request()->routeIs('material.index')) ? 'active' : '' }}"><a href="{{ route('material.index') }}"><i class="fa fa-circle-o"></i> List</a></li>
                     <li class="{{ (request()->routeIs('material.create')) ? 'active' : '' }}"><a href="{{ route('material.create') }}"><i class="fa fa-circle-o"></i> Buat Baru</a></li>
                 </ul>
-            </li> --}}
+            </li>
 
             {{-- <li class="treeview {{ (request()->routeIs('project*')) ? 'active' : '' }}" >
                 <a href="#">
