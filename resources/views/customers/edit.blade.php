@@ -53,14 +53,14 @@
                             <div class="form-group">
                                 <label for="phone">Telepon</label>
                                 <input type="tel" name="phone"
-                                    value="{{ $customers->name }}"
+                                    value="{{ $customers->phone }}"
                                     class="form-control {{ $errors->has('phone') ? 'is-invalid':'' }}"
                                     id="phone" required>
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="text" name="email"
-                                    value="{{ $customers->name }}"
+                                <input type="email" name="email"
+                                    value="{{ $customers->email }}"
                                     class="form-control {{ $errors->has('email') ? 'is-invalid':'' }}"
                                     id="email" required>
                             </div>

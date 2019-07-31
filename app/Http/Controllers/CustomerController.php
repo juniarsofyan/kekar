@@ -24,23 +24,20 @@ class CustomerController extends Controller
         $this->validate($request, [
             'customer_name' => 'required|string|max:50',
             'phone' => 'required|string',
-            'email' => 'required|string',
+            'email' => 'required|email',
             'address' => 'required|string'
         ]);
 
-
-        /* echo "<pre>";
-        print_r($request->email);
-        echo "</pre>";
-        exit(); */
-
         try {
             $customers = Customer::firstOrCreate(
-                ['name' => $request->customer_name],
-                ['phone' => $request->phone],
-                ['email' => $request->email],
-                ['address' => $request->address]
+                [
+                    'name' => $request->input('customer_name'),
+                    'phone' => $request->input('phone'),
+                    'email' => $request->input('email'),
+                    'address' => $request->input('address')
+                ]
             );
+
             return redirect()->route('customer.index')->with(['success' => 'Customer: ' . $customers->name . ' ditambahkan']);
         } catch (\Exception $e) {
             return redirect()->back()->with(['error' => $e->getMessage()]);

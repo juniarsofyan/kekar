@@ -49,7 +49,9 @@
                             </div>
                             <div class="form-group">
                                 <label for="phone">Telepon</label>
-                                <input type="tel" name="phone"
+                                <input 
+                                    type="tel" 
+                                    name="phone"
                                     class="form-control {{ $errors->has('phone') ? 'is-invalid':'' }}"
                                     id="phone" required>
                             </div>
