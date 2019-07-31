@@ -31,10 +31,10 @@ class CustomerController extends Controller
         try {
             $customers = Customer::firstOrCreate(
                 [
-                    'name' => $request->input('customer_name'),
-                    'phone' => $request->input('phone'),
-                    'email' => $request->input('email'),
-                    'address' => $request->input('address')
+                    'name' => $request->customer_name,
+                    'phone' => $request->phone,
+                    'email' => $request->email,
+                    'address' => $request->address
                 ]
             );
 

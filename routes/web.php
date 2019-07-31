@@ -26,3 +26,7 @@ Route::resource('/component', 'ComponentController')->except([
 Route::resource('/customer', 'CustomerController')->except([
     'show'
 ]);
+
+Route::resource('/inventory', 'InventoryController')->except([
+    'show'
+]);

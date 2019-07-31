@@ -96,7 +96,7 @@
                 </ul>
             </li>
 
-            {{-- <li class="treeview {{ (request()->routeIs('inventory*')) ? 'active' : '' }}" >
+            <li class="treeview {{ (request()->routeIs('inventory*')) ? 'active' : '' }}" >
                 <a href="#">
                     <span>Barang</span>
                     <span class="pull-right-container">
@@ -108,7 +108,7 @@
                     <li class="{{ (request()->routeIs('inventory.index')) ? 'active' : '' }}"><a href="{{ route('inventory.index') }}"><i class="fa fa-circle-o"></i> List</a></li>
                     <li class="{{ (request()->routeIs('inventory.create')) ? 'active' : '' }}"><a href="{{ route('inventory.create') }}"><i class="fa fa-circle-o"></i> Buat Baru</a></li>
                 </ul>
-            </li> --}}
+            </li>
 
             {{-- <li class="treeview {{ (request()->routeIs('material*')) ? 'active' : '' }}" >
                 <a href="#">
