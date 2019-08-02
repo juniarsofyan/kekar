@@ -34,3 +34,7 @@ Route::resource('/inventory', 'InventoryController')->except([
 Route::resource('/material', 'MaterialController')->except([
     'show'
 ]);
+
+Route::resource('/process', 'ProcessController')->except([
+    'show'
+]);

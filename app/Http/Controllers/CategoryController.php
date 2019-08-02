@@ -28,8 +28,7 @@ class CategoryController extends Controller
 
         try {
             $categories = Category::firstOrCreate([
-                'name' => $request->category_name
-            ], [
+                'name' => $request->category_name,
                 'description' => $request->description
             ]);
             return redirect()->route('category.index')->with(['success' => 'Kategori: ' . $categories->name . ' Ditambahkan']);

@@ -68,7 +68,7 @@
                 </ul>
             </li>
 
-            {{-- <li class="treeview {{ (request()->routeIs('process*')) ? 'active' : '' }}" >
+            <li class="treeview {{ (request()->routeIs('process*')) ? 'active' : '' }}" >
                 <a href="#">
                     <span>Proses</span>
                     <span class="pull-right-container">
@@ -80,7 +80,7 @@
                     <li class="{{ (request()->routeIs('process.index')) ? 'active' : '' }}"><a href="{{ route('process.index') }}"><i class="fa fa-circle-o"></i> List</a></li>
                     <li class="{{ (request()->routeIs('process.create')) ? 'active' : '' }}"><a href="{{ route('process.create') }}"><i class="fa fa-circle-o"></i> Buat Baru</a></li>
                 </ul>
-            </li> --}}
+            </li>
 
             <li class="treeview {{ (request()->routeIs('customer*')) ? 'active' : '' }}" >
                 <a href="#">
