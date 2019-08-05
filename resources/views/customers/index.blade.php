@@ -54,7 +54,7 @@
                                         <td>{{ $row->name }} </td>
                                         <td>{{ $row->phone }} </td>
                                         <td>{{ $row->email }} </td>
-                                        <td>{{ $row->address }} </td>
+                                        <td>{{ str_limit($row->address, 50) }}... </td>
                                         <td>
                                             <form action="{{ route('customer.destroy', $row->id) }}" method="POST">
                                                 @csrf
@@ -69,7 +69,7 @@
                                         <td colspan="4" class="text-center">Tidak ada data</td>
                                     </tr>
                                 @endforelse
-                                
+
                             </tbody>
                         </table>
                     </div>
