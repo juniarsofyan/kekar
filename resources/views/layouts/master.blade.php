@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     @yield('title')
 
@@ -49,15 +53,15 @@
     <div class="wrapper">
 
         @include('layouts.module.topbar')
-        
+
         @include('layouts.module.sidebar')
-        
+
         @yield('content')
-        
+
         @include('layouts.module.footer')
 
         @include('layouts.module.controlsidebar')
-        
+
     </div>
     <!-- ./wrapper -->
 
@@ -71,8 +75,8 @@
 
         window.setTimeout(function() {
         $(".alert").fadeTo(1000, 500).slideUp(500, function(){
-            // $(this).remove(); 
-            $(this).slideUp(500); 
+            // $(this).remove();
+            $(this).slideUp(500);
 
         });
     }, 4000);

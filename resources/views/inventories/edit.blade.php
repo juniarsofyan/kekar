@@ -37,9 +37,13 @@
                         <div class="box-body">
 
                             {{-- IF SOMETHING WRONG HAPPENED --}}
-                            @if (session('error'))
+                            @if ($errors->any())
                                 @alert(['type' => 'danger'])
-                                    {!! session('error') !!}
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li> {{ $error }} </li>
+                                        @endforeach
+                                    </ul>
                                 @endalert
                             @endif
 

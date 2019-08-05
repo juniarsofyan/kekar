@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-<title>Manajemen Proses</title>
+<title>Manajemen Hak Akses</title>
 @endsection
 
 @section('content')
@@ -10,10 +10,10 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1> Manajemen Proses </h1>
+        <h1> Manajemen Hak Akses </h1>
         <ol class="breadcrumb">
             <li><a href="#">Home</a></li>
-            <li class="active">Proses</li>
+            <li class="active">Hak Akses</li>
         </ol>
     </section>
 
@@ -24,7 +24,7 @@
             <div class="col-md-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">List Proses</h3>
+                        <h3 class="box-title">List Hak Akses</h3>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
@@ -33,43 +33,29 @@
                             @alert(['type' => 'success'])
                                 {!! session('success') !!}
                             @endalert
-                            <br/>
-                        @endif
-
-                        @if (count($errors) > 0)
-                            @alert(['type' => 'danger'])
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li> {{ $error }} </li>
-                                    @endforeach
-                                </ul>
-                            @endalert
                         @endif
 
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Proses</th>
-                                    <th>Deskripsi</th>
+                                    <th>Nama</th>
                                     <th>Opsi</th>
                                 </tr>
                             </thead>
                             <tbody>
 
                                 @php $no = 1; @endphp
-                                @forelse ($processes as $row)
+                                @forelse ($permissions as $row)
                                     <tr>
                                         <td>{{ $no++ }}</td>
                                         <td>{{ $row->name }} </td>
-                                        <td>{{ $row->description }} </td>
                                         <td>
-                                            <form action="{{ route('process.destroy', $row->id) }}" method="POST">
-                                                @csrf
-                                                <input type="hidden" name="_method" value="DELETE">
-                                                <a href="{{ route('process.edit', $row->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
-                                                <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
-                                            </form>
+                                            <a href="{{ route('permission.edit', $row->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
+
+                                            {!! Form::open(['method' => 'DELETE', 'route' => ['permission.destroy', $row->id],'style'=>'display:inline']) !!}
+                                                {!! Form::button('<i class="fa fa-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-sm']) !!}
+                                            {!! Form::close() !!}
                                         </td>
                                     </tr>
                                 @empty

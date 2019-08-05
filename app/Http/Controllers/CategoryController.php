@@ -7,9 +7,17 @@ use App\Category;
 
 class CategoryController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:Category Create|Category View|Category Update|Category Delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:Category Create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:Category Edit', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:Category Delete', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
-        $categories = Category::orderBy('created_at', 'DESC')->paginate(10);
+        $categories = Category::orderBy('created_at', 'DESC');
         return view('categories.index', compact('categories'));
     }
 

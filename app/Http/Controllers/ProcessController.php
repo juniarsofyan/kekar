@@ -22,7 +22,7 @@ class ProcessController extends Controller
     {
         //validasi form
         $this->validate($request, [
-            'process_name' => 'required|string|max:50',
+            'process_name' => 'required|string|max:5',
             'description' => 'nullable|string'
         ]);
 

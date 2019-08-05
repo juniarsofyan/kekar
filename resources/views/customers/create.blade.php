@@ -35,9 +35,13 @@
                         <div class="box-body">
 
                             {{-- IF SOMETHING WRONG HAPPENED --}}
-                            @if (session('error'))
+                            @if ($errors->any())
                                 @alert(['type' => 'danger'])
-                                    {!! session('error') !!}
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li> {{ $error }} </li>
+                                        @endforeach
+                                    </ul>
                                 @endalert
                             @endif
 
@@ -49,8 +53,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="phone">Telepon</label>
-                                <input 
-                                    type="tel" 
+                                <input
+                                    type="tel"
                                     name="phone"
                                     class="form-control {{ $errors->has('phone') ? 'is-invalid':'' }}"
                                     id="phone" required>

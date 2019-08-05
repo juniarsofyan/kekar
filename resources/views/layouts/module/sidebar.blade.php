@@ -40,7 +40,85 @@
                 </ul>
             </li>
 
-            <li class="treeview {{ (request()->routeIs('category*')) ? 'active' : '' }}" >
+            @can('User View')
+            <li class="treeview {{ (request()->routeIs('user*')) || (request()->routeIs('role*')) || (request()->routeIs('permission*')) ? 'active' : '' }}">
+                <a href="#">
+                    <i class="fa fa-share"></i> <span>Manajemen User</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    @can('User View')
+                    <li class="treeview {{ (request()->routeIs('user*')) ? 'active' : '' }}">
+                        <a href="#">
+                            <span>User</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+
+                        <ul class="treeview-menu">
+                            <li class="{{ (request()->routeIs('user.index')) ? 'active' : '' }}">
+                                <a href="{{ route('user.index') }}"><i class="fa fa-circle-o"></i> List</a>
+                            </li>
+
+                            @can('Category Create')
+                            <li class="{{ (request()->routeIs('user.create')) ? 'active' : '' }}">
+                                <a href="{{ route('user.create') }}"><i class="fa fa-circle-o"></i> Buat Baru</a>
+                            </li>
+                            @endcan
+                        </ul>
+                    </li>
+                    @endcan
+
+                    @can('Role View')
+                    <li class="treeview {{ (request()->routeIs('role*')) ? 'active' : '' }}">
+                        <a href="#">
+                            <span>Tipe User</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+
+                        <ul class="treeview-menu">
+                            <li class="{{ (request()->routeIs('role.index')) ? 'active' : '' }}"><a
+                                    href="{{ route('role.index') }}"><i class="fa fa-circle-o"></i> List</a></li>
+
+                            @can('Category Create')
+                            <li class="{{ (request()->routeIs('role.create')) ? 'active' : '' }}"><a
+                                    href="{{ route('role.create') }}"><i class="fa fa-circle-o"></i> Buat Baru</a></li>
+                            @endcan
+                        </ul>
+                    </li>
+                    @endcan
+
+                    @can('Permission View')
+                    <li class="treeview {{ (request()->routeIs('permission*')) ? 'active' : '' }}">
+                        <a href="#">
+                            <span>Hak Akses</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+
+                        <ul class="treeview-menu">
+                            <li class="{{ (request()->routeIs('permission.index')) ? 'active' : '' }}"><a
+                                    href="{{ route('permission.index') }}"><i class="fa fa-circle-o"></i> List</a></li>
+
+                            @can('Category Create')
+                            <li class="{{ (request()->routeIs('permission.create')) ? 'active' : '' }}"><a
+                                    href="{{ route('permission.create') }}"><i class="fa fa-circle-o"></i> Buat Baru</a></li>
+                            @endcan
+                        </ul>
+                    </li>
+                    @endcan
+                </ul>
+            </li>
+            @endcan
+
+            @can('Category View')
+            <li class="treeview {{ (request()->routeIs('category*')) ? 'active' : '' }}">
                 <a href="#">
                     <span>Kategori</span>
                     <span class="pull-right-container">
@@ -49,12 +127,19 @@
                 </a>
 
                 <ul class="treeview-menu">
-                    <li class="{{ (request()->routeIs('category.index')) ? 'active' : '' }}"><a href="{{ route('category.index') }}"><i class="fa fa-circle-o"></i> List</a></li>
-                    <li class="{{ (request()->routeIs('category.create')) ? 'active' : '' }}"><a href="{{ route('category.create') }}"><i class="fa fa-circle-o"></i> Buat Baru</a></li>
+                    <li class="{{ (request()->routeIs('category.index')) ? 'active' : '' }}"><a
+                            href="{{ route('category.index') }}"><i class="fa fa-circle-o"></i> List</a></li>
+
+                    @can('Category Create')
+                    <li class="{{ (request()->routeIs('category.create')) ? 'active' : '' }}"><a
+                            href="{{ route('category.create') }}"><i class="fa fa-circle-o"></i> Buat Baru</a></li>
+                    @endcan
                 </ul>
             </li>
+            @endcan
 
-            <li class="treeview {{ (request()->routeIs('component*')) ? 'active' : '' }}" >
+            @can('Component View')
+            <li class="treeview {{ (request()->routeIs('component*')) ? 'active' : '' }}">
                 <a href="#">
                     <span>Komponen</span>
                     <span class="pull-right-container">
@@ -63,12 +148,19 @@
                 </a>
 
                 <ul class="treeview-menu">
-                    <li class="{{ (request()->routeIs('component.index')) ? 'active' : '' }}"><a href="{{ route('component.index') }}"><i class="fa fa-circle-o"></i> List</a></li>
-                    <li class="{{ (request()->routeIs('component.create')) ? 'active' : '' }}"><a href="{{ route('component.create') }}"><i class="fa fa-circle-o"></i> Buat Baru</a></li>
+                    <li class="{{ (request()->routeIs('component.index')) ? 'active' : '' }}"><a
+                            href="{{ route('component.index') }}"><i class="fa fa-circle-o"></i> List</a></li>
+
+                    @can('Component Create')
+                    <li class="{{ (request()->routeIs('component.create')) ? 'active' : '' }}"><a
+                            href="{{ route('component.create') }}"><i class="fa fa-circle-o"></i> Buat Baru</a></li>
+                    @endcan
                 </ul>
             </li>
+            @endcan
 
-            <li class="treeview {{ (request()->routeIs('process*')) ? 'active' : '' }}" >
+            @can('Process View')
+            <li class="treeview {{ (request()->routeIs('process*')) ? 'active' : '' }}">
                 <a href="#">
                     <span>Proses</span>
                     <span class="pull-right-container">
@@ -77,12 +169,19 @@
                 </a>
 
                 <ul class="treeview-menu">
-                    <li class="{{ (request()->routeIs('process.index')) ? 'active' : '' }}"><a href="{{ route('process.index') }}"><i class="fa fa-circle-o"></i> List</a></li>
-                    <li class="{{ (request()->routeIs('process.create')) ? 'active' : '' }}"><a href="{{ route('process.create') }}"><i class="fa fa-circle-o"></i> Buat Baru</a></li>
+                    <li class="{{ (request()->routeIs('process.index')) ? 'active' : '' }}"><a
+                            href="{{ route('process.index') }}"><i class="fa fa-circle-o"></i> List</a></li>
+
+                    @can('Process Create')
+                    <li class="{{ (request()->routeIs('process.create')) ? 'active' : '' }}"><a
+                            href="{{ route('process.create') }}"><i class="fa fa-circle-o"></i> Buat Baru</a></li>
+                    @endcan
                 </ul>
             </li>
+            @endcan
 
-            <li class="treeview {{ (request()->routeIs('customer*')) ? 'active' : '' }}" >
+            @can('Customer View')
+            <li class="treeview {{ (request()->routeIs('customer*')) ? 'active' : '' }}">
                 <a href="#">
                     <span>Customer</span>
                     <span class="pull-right-container">
@@ -91,12 +190,19 @@
                 </a>
 
                 <ul class="treeview-menu">
-                    <li class="{{ (request()->routeIs('customer.index')) ? 'active' : '' }}"><a href="{{ route('customer.index') }}"><i class="fa fa-circle-o"></i> List</a></li>
-                    <li class="{{ (request()->routeIs('customer.create')) ? 'active' : '' }}"><a href="{{ route('customer.create') }}"><i class="fa fa-circle-o"></i> Buat Baru</a></li>
+                    <li class="{{ (request()->routeIs('customer.index')) ? 'active' : '' }}"><a
+                            href="{{ route('customer.index') }}"><i class="fa fa-circle-o"></i> List</a></li>
+
+                    @can('Customer Create')
+                    <li class="{{ (request()->routeIs('customer.create')) ? 'active' : '' }}"><a
+                            href="{{ route('customer.create') }}"><i class="fa fa-circle-o"></i> Buat Baru</a></li>
+                    @endcan
                 </ul>
             </li>
+            @endcan
 
-            <li class="treeview {{ (request()->routeIs('inventory*')) ? 'active' : '' }}" >
+            @can('Inventory View')
+            <li class="treeview {{ (request()->routeIs('inventory*')) ? 'active' : '' }}">
                 <a href="#">
                     <span>Barang</span>
                     <span class="pull-right-container">
@@ -105,12 +211,19 @@
                 </a>
 
                 <ul class="treeview-menu">
-                    <li class="{{ (request()->routeIs('inventory.index')) ? 'active' : '' }}"><a href="{{ route('inventory.index') }}"><i class="fa fa-circle-o"></i> List</a></li>
-                    <li class="{{ (request()->routeIs('inventory.create')) ? 'active' : '' }}"><a href="{{ route('inventory.create') }}"><i class="fa fa-circle-o"></i> Buat Baru</a></li>
+                    <li class="{{ (request()->routeIs('inventory.index')) ? 'active' : '' }}"><a
+                            href="{{ route('inventory.index') }}"><i class="fa fa-circle-o"></i> List</a></li>
+
+                    @can('Inventory Create')
+                    <li class="{{ (request()->routeIs('inventory.create')) ? 'active' : '' }}"><a
+                            href="{{ route('inventory.create') }}"><i class="fa fa-circle-o"></i> Buat Baru</a></li>
+                    @endcan
                 </ul>
             </li>
+            @endcan
 
-            <li class="treeview {{ (request()->routeIs('material*')) ? 'active' : '' }}" >
+            @can('Material View')
+            <li class="treeview {{ (request()->routeIs('material*')) ? 'active' : '' }}">
                 <a href="#">
                     <span>Jenis Material</span>
                     <span class="pull-right-container">
@@ -119,23 +232,31 @@
                 </a>
 
                 <ul class="treeview-menu">
-                    <li class="{{ (request()->routeIs('material.index')) ? 'active' : '' }}"><a href="{{ route('material.index') }}"><i class="fa fa-circle-o"></i> List</a></li>
-                    <li class="{{ (request()->routeIs('material.create')) ? 'active' : '' }}"><a href="{{ route('material.create') }}"><i class="fa fa-circle-o"></i> Buat Baru</a></li>
+                    <li class="{{ (request()->routeIs('material.index')) ? 'active' : '' }}"><a
+                            href="{{ route('material.index') }}"><i class="fa fa-circle-o"></i> List</a></li>
+
+                    @can('Material Create')
+                    <li class="{{ (request()->routeIs('material.create')) ? 'active' : '' }}"><a
+                            href="{{ route('material.create') }}"><i class="fa fa-circle-o"></i> Buat Baru</a></li>
+                    @endcan
                 </ul>
             </li>
+            @endcan
 
             {{-- <li class="treeview {{ (request()->routeIs('project*')) ? 'active' : '' }}" >
-                <a href="#">
-                    <span>Kartu Kerja</span>
-                    <span class="pull-right-container">
-                        <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                </a>
+            <a href="#">
+                <span>Kartu Kerja</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
 
-                <ul class="treeview-menu">
-                    <li class="{{ (request()->routeIs('project.index')) ? 'active' : '' }}"><a href="{{ route('project.index') }}"><i class="fa fa-circle-o"></i> List</a></li>
-                    <li class="{{ (request()->routeIs('project.create')) ? 'active' : '' }}"><a href="{{ route('project.create') }}"><i class="fa fa-circle-o"></i> Buat Baru</a></li>
-                </ul>
+            <ul class="treeview-menu">
+                <li class="{{ (request()->routeIs('project.index')) ? 'active' : '' }}"><a
+                        href="{{ route('project.index') }}"><i class="fa fa-circle-o"></i> List</a></li>
+                <li class="{{ (request()->routeIs('project.create')) ? 'active' : '' }}"><a
+                        href="{{ route('project.create') }}"><i class="fa fa-circle-o"></i> Buat Baru</a></li>
+            </ul>
             </li> --}}
 
         </ul>

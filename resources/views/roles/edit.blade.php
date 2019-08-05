@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-<title>Manajemen Komponen</title>
+<title>Manajemen Tipe User</title>
 @endsection
 
 @section('content')
@@ -10,10 +10,11 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1> Manajemen Komponen </h1>
+        <h1> Manajemen Tipe User </h1>
         <ol class="breadcrumb">
             <li><a href="#">Home</a></li>
-            <li class="active">Komponen</li>
+            <li><a a href="{{ route('permission.index') }}">Tipe User</a></li>
+            <li class="active">Edit</li>
         </ol>
     </section>
 
@@ -25,13 +26,14 @@
                 <!-- general form elements -->
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Tambah Komponen</h3>
+                        <h3 class="box-title">Edit Tipe User</h3>
                     </div>
                     <!-- /.box-header -->
 
                     <!-- form start -->
-                    <form role="form" action="{{ route('component.store') }}" method="POST">
+                    <form role="form" action="{{ route('role.update', $role->id) }}" method="POST">
                         @csrf
+                        <input type="hidden" name="_method" value="PUT">
                         <div class="box-body">
 
                             {{-- IF SOMETHING WRONG HAPPENED --}}
@@ -46,23 +48,31 @@
                             @endif
 
                             <div class="form-group">
-                                <label for="component_name">Nama</label>
-                                <input type="text" name="component_name"
-                                    class="form-control {{ $errors->has('component_name') ? 'is-invalid':'' }}"
-                                    id="component_name" required>
+                                <label for="name">Nama</label>
+                                <input type="text" name="name"
+                                    value="{{ $role->name }}"
+                                    class="form-control {{ $errors->has('name') ? 'is-invalid':'' }}"
+                                    id="name" required>
                             </div>
+
                             <div class="form-group">
-                                <label for="description">Deskripsi</label>
-                                <textarea name="description" id="description"
-                                    class="form-control {{ $errors->has('description') ? 'is-invalid':'' }}" cols="5"
-                                    rows="5"></textarea>
+                                {!! Form::label('permissions', 'Tipe User') !!}
+                                @foreach($permissions as $permission)
+                                <div class="checkbox">
+                                    <label>
+                                        {!! Form::checkbox('permission[]', $permission->id, in_array($permission->id, $role_permissions) ? true : false, array('class' => 'name')) !!}
+                                        {{ $permission->name }}
+                                    </label>
+                                    <br/>
+                                </div>
+                                @endforeach
                             </div>
                         </div>
                         <!-- /.box-body -->
 
                         <div class="box-footer">
                             <button type="reset" class="btn btn-default">Cancel</button> &nbsp;&nbsp;
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">Update</button>
                         </div>
                     </form>
                 </div>

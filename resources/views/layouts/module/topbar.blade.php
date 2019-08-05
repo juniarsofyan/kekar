@@ -15,6 +15,7 @@
 
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
+                {{--
                 <!-- Messages: style can be found in dropdown.less-->
                 <li class="dropdown messages-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -221,7 +222,8 @@
                             <a href="#">View all tasks</a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
+
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -234,10 +236,13 @@
                             <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
 
                             <p>
-                                Alexander Pierce - Web Developer
-                                <small>Member since Nov. 2012</small>
+                                @php $user = Auth::user(); @endphp
+                                {{ $user->name }}
+                                <small>{{ $user->roles->pluck('name')->first() }}</small>
                             </p>
                         </li>
+
+                        {{--
                         <!-- Menu Body -->
                         <li class="user-body">
                             <div class="row">
@@ -253,21 +258,31 @@
                             </div>
                             <!-- /.row -->
                         </li>
+                         --}}
+
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
                                 <a href="#" class="btn btn-default btn-flat">Profile</a>
                             </div>
                             <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                <a class="btn btn-default btn-flat" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
                             </div>
                         </li>
                     </ul>
                 </li>
                 <!-- Control Sidebar Toggle Button -->
-                <li>
+                {{-- <li>
                     <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                </li>
+                </li> --}}
             </ul>
         </div>
     </nav>
