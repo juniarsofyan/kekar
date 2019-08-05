@@ -54,7 +54,7 @@
                                         <td>{{ $row->name }} </td>
                                         <td>{{ $row->phone }} </td>
                                         <td>{{ $row->email }} </td>
-                                        <td>{{ str_limit($row->address, 50) }}... </td>
+                                        <td>{{ str_limit($row->address, 50) }} </td>
                                         <td>
                                             <form action="{{ route('customer.destroy', $row->id) }}" method="POST">
                                                 @csrf
