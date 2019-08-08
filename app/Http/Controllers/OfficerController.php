@@ -81,7 +81,7 @@ class OfficerController extends Controller
      * @param  \App\Officer  $officer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Officer $id)
+    public function update(Request $request, $id)
     {
         // validasi form
         $this->validate($request, [
@@ -120,7 +120,7 @@ class OfficerController extends Controller
      * @param  \App\Officer  $officer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $id)
+    public function destroy($id)
     {
         $officers = Officer::findOrFail($id);
         $officers->delete();
