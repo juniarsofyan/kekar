@@ -249,7 +249,49 @@
             </li>
             @endcan
 
-            {{-- <li class="treeview {{ (request()->routeIs('project*')) ? 'active' : '' }}" >
+            @can('Project View')
+            <li class="treeview {{ (request()->routeIs('project*')) ? 'active' : '' }}">
+                <a href="#">
+                    <span>Project</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+
+                <ul class="treeview-menu">
+                    <li class="{{ (request()->routeIs('project.index')) ? 'active' : '' }}"><a
+                            href="{{ route('project.index') }}"><i class="fa fa-circle-o"></i> List</a></li>
+
+                    @can('Project Create')
+                    <li class="{{ (request()->routeIs('project.create')) ? 'active' : '' }}"><a
+                            href="{{ route('project.create') }}"><i class="fa fa-circle-o"></i> Buat Baru</a></li>
+                    @endcan
+                </ul>
+            </li>
+            @endcan
+
+            @can('Officer View')
+            <li class="treeview {{ (request()->routeIs('officer*')) ? 'active' : '' }}">
+                <a href="#">
+                    <span>Petugas</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+
+                <ul class="treeview-menu">
+                    <li class="{{ (request()->routeIs('officer.index')) ? 'active' : '' }}"><a
+                            href="{{ route('officer.index') }}"><i class="fa fa-circle-o"></i> List</a></li>
+
+                    @can('Officer Create')
+                    <li class="{{ (request()->routeIs('officer.create')) ? 'active' : '' }}"><a
+                            href="{{ route('officer.create') }}"><i class="fa fa-circle-o"></i> Buat Baru</a></li>
+                    @endcan
+                </ul>
+            </li>
+            @endcan
+
+            {{-- <li class="treeview {{ (request()->routeIs('cardwork*')) ? 'active' : '' }}" >
             <a href="#">
                 <span>Kartu Kerja</span>
                 <span class="pull-right-container">
@@ -258,10 +300,10 @@
             </a>
 
             <ul class="treeview-menu">
-                <li class="{{ (request()->routeIs('project.index')) ? 'active' : '' }}"><a
-                        href="{{ route('project.index') }}"><i class="fa fa-circle-o"></i> List</a></li>
-                <li class="{{ (request()->routeIs('project.create')) ? 'active' : '' }}"><a
-                        href="{{ route('project.create') }}"><i class="fa fa-circle-o"></i> Buat Baru</a></li>
+                <li class="{{ (request()->routeIs('cardwork.index')) ? 'active' : '' }}"><a
+                        href="{{ route('cardwork.index') }}"><i class="fa fa-circle-o"></i> List</a></li>
+                <li class="{{ (request()->routeIs('cardwork.create')) ? 'active' : '' }}"><a
+                        href="{{ route('cardwork.create') }}"><i class="fa fa-circle-o"></i> Buat Baru</a></li>
             </ul>
             </li> --}}
 

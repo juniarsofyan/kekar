@@ -55,4 +55,16 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('role', 'RoleController')->except([
         'show'
     ]);
+
+    Route::resource('project', 'ProjectController')->except([
+        'show'
+    ]);
+
+    Route::resource('cardwork', 'CardWorkController')->except([
+        'show'
+    ]);
+
+    Route::resource('officer', 'OfficerController')->except([
+        'show'
+    ]);
 });

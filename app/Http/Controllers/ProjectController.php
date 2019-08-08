@@ -7,6 +7,14 @@ use App\Project;
 
 class ProjectController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:Project Create|Project View|Project Update|Project Delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:Project Create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:Project Update', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:Project Delete', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         $projects = Project::orderBy('created_at', 'DESC')->paginate(10);
@@ -23,16 +31,15 @@ class ProjectController extends Controller
         //validasi form
         $this->validate($request, [
             'code' => 'required|string|max:50',
-            'date' => 'required|date',
-            'customer_id' => 'required|integer'
+            'description' => 'nullable|string'
         ]);
 
         try {
             $projects = Project::firstOrCreate([
                 'code' => $request->code,
-                'date' => $request->date,
-                'customer_id' => $request->customer_id
+                'description' => $request->description
             ]);
+
             return redirect()->route('project.index')->with(['success' => 'Project: ' . $projects->code . ' Ditambahkan']);
         } catch (\Exception $e) {
             return redirect()->back()->with(['error' => $e->getMessage()]);
@@ -57,8 +64,7 @@ class ProjectController extends Controller
         // validasi form
         $this->validate($request, [
             'code' => 'required|string|max:50',
-            'date' => 'required|date',
-            'customer_id' => 'required|integer'
+            'description' => 'nullable|string'
         ]);
 
         try {
@@ -67,8 +73,7 @@ class ProjectController extends Controller
             //update data
             $projects->update([
                 'code' => $request->code,
-                'date' => $request->date,
-                'customer_id' => $request->customer_id
+                'description' => $request->description
             ]);
 
             return redirect(route('project.index'))->with(['success' => 'Project: ' . $projects->code . ' diubah']);
