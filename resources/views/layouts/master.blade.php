@@ -37,6 +37,8 @@
     <!-- DataTables -->
     <link rel="stylesheet" href="{{ asset('bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
 
+    @yield('styles')
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -74,12 +76,12 @@
         $.widget.bridge('uibutton', $.ui.button);
 
         window.setTimeout(function() {
-        $(".alert").fadeTo(1000, 500).slideUp(500, function(){
-            // $(this).remove();
-            $(this).slideUp(500);
+            $(".alert").fadeTo(1000, 500).slideUp(500, function(){
+                // $(this).remove();
+                $(this).slideUp(500);
 
-        });
-    }, 4000);
+            });
+        }, 4000);
 
     </script>
     <!-- Bootstrap 3.3.7 -->
@@ -114,6 +116,8 @@
     <script src="{{ asset('dist/js/pages/dashboard.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('dist/js/demo.js') }}"></script>
+
+    @yield('scripts')
 </body>
 
 </html>

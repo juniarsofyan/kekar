@@ -291,6 +291,27 @@
             </li>
             @endcan
 
+            @can('Card Work View')
+            <li class="treeview {{ (request()->routeIs('cardwork*')) ? 'active' : '' }}">
+                <a href="#">
+                    <span>Kartu Kerja</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+
+                <ul class="treeview-menu">
+                    <li class="{{ (request()->routeIs('cardwork.index')) ? 'active' : '' }}"><a
+                            href="{{ route('cardwork.index') }}"><i class="fa fa-circle-o"></i> List</a></li>
+
+                    @can('Card Work Create')
+                    <li class="{{ (request()->routeIs('cardwork.create')) ? 'active' : '' }}"><a
+                            href="{{ route('cardwork.create') }}"><i class="fa fa-circle-o"></i> Buat Baru</a></li>
+                    @endcan
+                </ul>
+            </li>
+            @endcan
+
             {{-- <li class="treeview {{ (request()->routeIs('cardwork*')) ? 'active' : '' }}" >
             <a href="#">
                 <span>Kartu Kerja</span>
