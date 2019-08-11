@@ -1,5 +1,7 @@
 <?php
 
+use App\CardWork;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -59,6 +61,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('project', 'ProjectController')->except([
         'show'
     ]);
+
+    Route::get('cardwork/{id}/detail', 'CardWorkController@detail')->name('cardwork.detail');
 
     Route::resource('cardwork', 'CardWorkController')->except([
         'show'

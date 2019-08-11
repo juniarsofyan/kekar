@@ -8,6 +8,8 @@ use App\Project;
 use App\Inventory;
 use App\Process;
 use App\Customer;
+use App\Material;
+use App\Component;
 use Illuminate\Http\Request;
 use DB;
 
@@ -57,8 +59,8 @@ class CardWorkController extends Controller
     public function store(Request $request)
     {
         //validasi form
-        $a = $this->validate($request, [
-            'date' => 'required|date',
+        $this->validate($request, [
+            'date' => 'required|date_format:d/m/Y',
             'category' => 'required|string',
             'po_number' => 'required|string',
             'inventory' => 'required|string',
@@ -68,8 +70,12 @@ class CardWorkController extends Controller
         ]);
 
         try {
+            // ubah format tanggal
+            $request->date = str_replace('/', '-', $request->date);
+            $request->date = date('Y-m-d', strtotime($request->date));
+
             $cardworks = CardWork::firstOrCreate([
-                'date' => date('Y-m-d', strtotime($request->date)),
+                'date' => $request->date,
                 'category_id' => $request->category,
                 'po_number' => $request->po_number,
                 'inventory_id' => $request->inventory,
@@ -79,7 +85,7 @@ class CardWorkController extends Controller
                 'user_id' => \Auth::user()->id
             ]);
 
-            return redirect()->route('cardwork.index')->with(['success' => 'Kategori: ' . $cardworks->name . ' Ditambahkan']);
+            return redirect()->route('cardwork.index')->with(['success' => 'Kartu Kerja: ' . $cardworks->name . ' Ditambahkan']);
         } catch (\Exception $e) {
             return redirect()->back()->with(['error' => $e->getMessage()]);
         }
@@ -102,15 +108,18 @@ class CardWorkController extends Controller
      * @param  \App\CardWork  $cardWork
      * @return \Illuminate\Http\Response
      */
-    public function edit(CardWork $cardWork)
+    public function edit($id)
     {
-        $categories = Category::get();
-        $inventories = Inventory::get();
-        $processes = Process::get();
-        $customers = Customer::get();
-        $projects = Project::get();
+        $categories = Category::pluck('name', 'id');
+        $inventories = Inventory::pluck('name', 'id');
+        $processes = Process::pluck('name', 'id');
+        $customers = Customer::pluck('name', 'id');
+        $projects = Project::pluck('code', 'id');
+        $cardworks = CardWork::findOrFail($id);
 
-        return view('cardworks.edit', compact('categories', 'inventories', 'processes', 'customers', 'projects'));
+        $cardworks->date = date('d/m/Y', strtotime($cardworks->date));
+
+        return view('cardworks.edit', compact('categories', 'inventories', 'processes', 'customers', 'projects', 'cardworks'));
     }
 
     /**
@@ -120,9 +129,45 @@ class CardWorkController extends Controller
      * @param  \App\CardWork  $cardWork
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CardWork $cardWork)
+    public function update(Request $request, $id)
     {
-        //
+        // validasi form
+        $this->validate($request, [
+            'date' => 'required|date_format:d/m/Y',
+            'category' => 'required|string',
+            'po_number' => 'required|string',
+            'inventory' => 'required|string',
+            'process' => 'required|string',
+            'customer' => 'required|string',
+            'project' => 'required|string'
+        ]);
+
+        try {
+            //select data berdasarkan id
+            $cardworks = Cardwork::findOrFail($id);
+
+            // ubah format tanggal
+            $request->date = str_replace('/', '-', $request->date);
+            $request->date = date('Y-m-d', strtotime($request->date));
+
+            //update data
+            $cardworks->update([
+                'date' => $request->date,
+                'category_id' => $request->category,
+                'po_number' => $request->po_number,
+                'inventory_id' => $request->inventory,
+                'process_id' => $request->process,
+                'customer_id' => $request->customer,
+                'project_id' => $request->project,
+                'user_id' => \Auth::user()->id
+            ]);
+
+            //redirect ke route kategori.index
+            return redirect(route('cardwork.index'))->with(['success' => 'Kartu Kerja diubah']);
+        } catch (\Exception $e) {
+            //jika gagal, redirect ke form yang sama lalu membuat flash message error
+            return redirect()->back()->with(['error' => $e->getMessage()]);
+        }
     }
 
     /**
@@ -131,8 +176,26 @@ class CardWorkController extends Controller
      * @param  \App\CardWork  $cardWork
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CardWork $cardWork)
+    public function destroy($id)
     {
-        //
+        $cardworks = CardWork::findOrFail($id);
+        $cardworks->delete();
+        return redirect()->back()->with(['success' => "Kartu Kerja telah dihapus!"]);
+    }
+
+    public function detail($id)
+    {
+        $cardworks = DB::table('card_work_details')
+            ->join('card_works', 'card_work_details.card_work_id', '=', 'card_works.id')
+            ->join('components', 'card_work_details.component_id', '=', 'components.id')
+            ->join('materials', 'card_work_details.material_id', '=', 'materials.id')
+            ->select('card_works.id', 'components.name AS component', 'materials.name AS material', 'dimension', 'problem', 'solution', 'total_hours', 'qty', 'weight')
+            ->where('card_work_id', $id)
+            ->get();
+
+        $components = Component::pluck('name', 'id');
+        $materials = Material::pluck('name', 'id');
+
+        return view('cardworks.detail', compact('cardworks', 'components', 'materials'));
     }
 }

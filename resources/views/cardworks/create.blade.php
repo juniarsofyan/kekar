@@ -67,7 +67,7 @@
                             </div>
 
                             <div class="form-group">
-                                {!! Form::label('po_number', 'PO. Number') !!}
+                                {!! Form::label('po_number', 'Nomor PO') !!}
                                 {!! Form::text('po_number', null, array('required', 'class'=>(($errors->has("po_number")) ? "is-invalid":"").' form-control ')) !!}
                             </div>
 
@@ -91,12 +91,6 @@
                                 {!! Form::select('project', $projects, null, ['class' => 'form-control','placeholder' => '-- PILIH PROJECT --']) !!}
                             </div>
 
-                            {{-- <div class="form-group">
-                                <label for="description">Deskripsi</label>
-                                <textarea name="description" id="description"
-                                    class="form-control {{ $errors->has('description') ? 'is-invalid':'' }}" cols="5"
-                                    rows="5"></textarea>
-                            </div> --}}
                         </div>
                         <!-- /.box-body -->
 
