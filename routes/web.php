@@ -63,6 +63,10 @@ Route::group(['middleware' => ['auth']], function () {
     ]);
 
     Route::get('cardwork/{id}/detail', 'CardWorkController@detail')->name('cardwork.detail');
+    Route::post('cardwork/{id}/detail', 'CardWorkController@storeDetail')->name('cardwork.storedetail');
+    Route::delete('cardwork/{id}/detail/delete', 'CardWorkController@destroyDetail')->name('cardwork.destroydetail');
+    Route::get('cardwork/{id}/detail/edit', 'CardWorkController@editDetail')->name('cardwork.editdetail');
+    Route::put('cardwork/{id}/detail/update', 'CardWorkController@updateDetail')->name('cardwork.updatedetail');
 
     Route::resource('cardwork', 'CardWorkController')->except([
         'show'

@@ -30,12 +30,12 @@
                 <!-- general form elements -->
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Tambah Kartu Kerja</h3>
+                        <h3 class="box-title">Tambah Detail Kartu Kerja</h3>
                     </div>
                     <!-- /.box-header -->
 
                     <!-- form start -->
-                    <form role="form" action="{{ route('cardwork.store') }}" method="POST">
+                    <form role="form" action="{{ route('cardwork.storedetail', $cardworks['id']) }}" method="POST">
                         @csrf
                         <div class="box-body">
 
@@ -50,45 +50,75 @@
                                 @endalert
                             @endif
 
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        {!! Form::label('component', 'Komponen') !!}
+                                        {!! Form::select('component', $components, null, ['class' => 'form-control','placeholder' => '-- PILIH KOMPONEN --']) !!}
+                                    </div>
+                                </div>
 
-                            <div class="form-group">
-                                {!! Form::label('component', 'Komponen') !!}
-                                {!! Form::select('component', $components, null, ['class' => 'form-control','placeholder' => '-- PILIH KOMPONEN --']) !!}
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        {!! Form::label('material', 'Jenis Material') !!}
+                                        {!! Form::select('material', $materials, null, ['class' => 'form-control','placeholder' => '-- PILIH JENIS MATERIAL --']) !!}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        {!! Form::label('dimension', 'Dimensi') !!}
+                                        {!! Form::text('dimension', null, array('required', 'class'=>(($errors->has("dimension")) ? "is-invalid":"").' form-control ')) !!}
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="form-group">
-                                {!! Form::label('material', 'Jenis Material') !!}
-                                {!! Form::select('material', $materials, null, ['class' => 'form-control','placeholder' => '-- PILIH JENIS MATERIAL --']) !!}
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        {!! Form::label('problem', 'Masalah') !!}
+                                        {!! Form::textarea('problem', null, array('required', 'rows' => 4, 'cols' => 54, 'style' => 'resize:none', 'class'=>(($errors->has("problem")) ? "is-invalid":"").' form-control ')) !!}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        {!! Form::label('solution', 'Solusi') !!}
+                                        {!! Form::textarea('solution', null, array('required', 'rows' => 4, 'cols' => 54, 'style' => 'resize:none', 'class'=>(($errors->has("solution")) ? "is-invalid":"").' form-control ')) !!}
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="form-group">
-                                {!! Form::label('dimension', 'Dimensi') !!}
-                                {!! Form::text('dimension', null, array('required', 'class'=>(($errors->has("dimension")) ? "is-invalid":"").' form-control ')) !!}
-                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        {!! Form::label('total_hours', 'Total Jam') !!}
+                                        <div class="input-group">
+                                            {!! Form::text('total_hours', null, array('required', 'class'=>(($errors->has("total_hours")) ? "is-invalid":"").' form-control ')) !!}
+                                            <span class="input-group-addon">Jam</span>
+                                        </div>
+                                    </div>
+                                </div>
 
-                            <div class="form-group">
-                                {!! Form::label('problem', 'Masalah') !!}
-                                {!! Form::text('problem', null, array('required', 'class'=>(($errors->has("problem")) ? "is-invalid":"").' form-control ')) !!}
-                            </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        {!! Form::label('qty', 'Qty') !!}
+                                        <div class="input-group">
+                                            {!! Form::text('qty', null, array('required', 'class'=>(($errors->has("qty")) ? "is-invalid":"").' form-control ')) !!}
+                                            <span class="input-group-addon">Pcs</span>
+                                        </div>
+                                    </div>
+                                </div>
 
-                            <div class="form-group">
-                                {!! Form::label('solution', 'Solusi') !!}
-                                {!! Form::text('solution', null, array('required', 'class'=>(($errors->has("solution")) ? "is-invalid":"").' form-control ')) !!}
-                            </div>
-
-                            <div class="form-group">
-                                {!! Form::label('total_hours', 'Total Jam') !!}
-                                {!! Form::text('total_hours', null, array('required', 'class'=>(($errors->has("total_hours")) ? "is-invalid":"").' form-control ')) !!}
-                            </div>
-
-                            <div class="form-group">
-                                {!! Form::label('qty', 'Qty') !!}
-                                {!! Form::text('qty', null, array('required', 'class'=>(($errors->has("qty")) ? "is-invalid":"").' form-control ')) !!}
-                            </div>
-
-                            <div class="form-group">
-                                {!! Form::label('weight', 'Berat') !!}
-                                {!! Form::text('weight', null, array('required', 'class'=>(($errors->has("weight")) ? "is-invalid":"").' form-control ')) !!}
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        {!! Form::label('weight', 'Berat') !!}
+                                        <div class="input-group">
+                                            {!! Form::text('weight', null, array('required', 'class'=>(($errors->has("weight")) ? "is-invalid":"").' form-control ')) !!}
+                                            <span class="input-group-addon">KG</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                         </div>
@@ -141,22 +171,22 @@
                             <tbody>
 
                                 @php $no = 1; @endphp
-                                @forelse ($cardworks as $row)
+                                @forelse ($cardwork_details as $row)
                                     <tr>
                                         <td>{{ $no++ }}</td>
                                         <td>{{ $row->component }} </td>
                                         <td>{{ $row->material }} </td>
-                                        <td>{{ $row->dimensi }} </td>
+                                        <td>{{ $row->dimension }} </td>
                                         <td>{{ $row->problem }} </td>
                                         <td>{{ $row->solution }} </td>
                                         <td>{{ $row->total_hours }} </td>
                                         <td>{{ $row->qty }} </td>
                                         <td>{{ $row->weight }} </td>
                                         <td>
-                                            <form action="{{ route('cardwork.destroy', $row->id) }}" method="POST">
+                                            <form action="{{ route('cardwork.destroydetail', $row->id) }}" method="POST">
                                                 @csrf
                                                 <input type="hidden" name="_method" value="DELETE">
-                                                <a href="{{ route('cardwork.edit', $row->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
+                                                {{-- <a href="{{ route('cardwork.edit', $row->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a> --}}
                                                 <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                                             </form>
                                         </td>

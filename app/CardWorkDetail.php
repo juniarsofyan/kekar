@@ -10,6 +10,6 @@ class CardWorkDetail extends Model
 
     public function cardWorks()
     {
-        return $this->hasMany(CardWork::class);
+        return $this->belongsTo(CardWork::class);
     }
 }
