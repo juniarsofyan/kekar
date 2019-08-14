@@ -70,7 +70,7 @@
 
                             <div class="form-group">
                                 {!! Form::label('po_number', 'Nomor PO') !!}
-                                {!! Form::text('po_number', $cardworks->po_number, array('required', 'autofocus', 'class'=>(($errors->has("po_number")) ? "is-invalid":"").' form-control ')) !!}
+                                {!! Form::text('po_number', $cardworks->po_number, array('class'=>(($errors->has("po_number")) ? "is-invalid":"").' form-control ')) !!}
                             </div>
 
                             <div class="form-group">

@@ -43,15 +43,15 @@ class CardWorkDetailController extends Controller
     public function store(Request $request)
     {
         //validasi form
-        $a = $this->validate($request, [
+        $this->validate($request, [
             'component' => 'required|integer',
             'material' => 'required|integer',
-            'dimension' => 'required|string',
+            'dimension' => 'nullable|string',
             'problem' => 'required|string',
             'solution' => 'required|string',
             'total_hours' => 'required|integer',
             'qty' => 'required|integer',
-            'weight' => 'required'
+            'weight' => 'nullable'
         ]);
 
         try {
@@ -116,15 +116,15 @@ class CardWorkDetailController extends Controller
     public function update(Request $request, $id)
     {
         //validasi form
-        $a = $this->validate($request, [
+        $this->validate($request, [
             'component' => 'required|integer',
             'material' => 'required|integer',
-            'dimension' => 'required|string',
+            'dimension' => 'nullable|string',
             'problem' => 'required|string',
             'solution' => 'required|string',
             'total_hours' => 'required|integer',
             'qty' => 'required|integer',
-            'weight' => 'required'
+            'weight' => 'nullable'
         ]);
 
         try {

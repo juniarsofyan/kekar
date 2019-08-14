@@ -60,7 +60,7 @@ class CardWorkController extends Controller
         $this->validate($request, [
             'date' => 'required|date_format:d/m/Y',
             'category' => 'required|string',
-            'po_number' => 'required|string',
+            'po_number' => 'nullable|string',
             'inventory' => 'required|string',
             'process' => 'required|string',
             'customer' => 'required|string',
@@ -133,7 +133,7 @@ class CardWorkController extends Controller
         $this->validate($request, [
             'date' => 'required|date_format:d/m/Y',
             'category' => 'required|string',
-            'po_number' => 'required|string',
+            'po_number' => 'nullable|string',
             'inventory' => 'required|string',
             'process' => 'required|string',
             'customer' => 'required|string',

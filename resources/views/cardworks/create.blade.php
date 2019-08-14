@@ -68,7 +68,7 @@
 
                             <div class="form-group">
                                 {!! Form::label('po_number', 'Nomor PO') !!}
-                                {!! Form::text('po_number', null, array('required', 'class'=>(($errors->has("po_number")) ? "is-invalid":"").' form-control ')) !!}
+                                {!! Form::text('po_number', null, array('class'=>(($errors->has("po_number")) ? "is-invalid":"").' form-control ')) !!}
                             </div>
 
                             <div class="form-group">

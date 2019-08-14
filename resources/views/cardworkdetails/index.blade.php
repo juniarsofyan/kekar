@@ -82,7 +82,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         {!! Form::label('dimension', 'Dimensi') !!}
-                                        {!! Form::text('dimension', isset($cardwork_detail->dimension) ? $cardwork_detail->dimension : null, array('required', 'class'=>(($errors->has("dimension")) ? "is-invalid":"").' form-control ')) !!}
+                                        {!! Form::text('dimension', isset($cardwork_detail->dimension) ? $cardwork_detail->dimension : null, array('class'=>(($errors->has("dimension")) ? "is-invalid":"").' form-control ')) !!}
                                     </div>
                                 </div>
                             </div>
@@ -128,7 +128,7 @@
                                     <div class="form-group">
                                         {!! Form::label('weight', 'Berat') !!}
                                         <div class="input-group">
-                                            {!! Form::text('weight', isset($cardwork_detail->weight) ? $cardwork_detail->weight : null, array('required', 'class'=>(($errors->has("weight")) ? "is-invalid":"").' form-control ')) !!}
+                                            {!! Form::text('weight', isset($cardwork_detail->weight) ? $cardwork_detail->weight : null, array('class'=>(($errors->has("weight")) ? "is-invalid":"").' form-control ')) !!}
                                             <span class="input-group-addon">KG</span>
                                         </div>
                                     </div>
