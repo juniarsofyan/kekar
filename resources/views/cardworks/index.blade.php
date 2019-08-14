@@ -61,7 +61,7 @@
                                         <td>{{ $row->proccess }} </td>
                                         <td>{{ $row->customer }} </td>
                                         <td>{{ $row->project }} </td>
-                                        <td> <a href="{{ route('cardwork.detail', $row->id) }}" class="">Detail</a> </td>
+                                        <td> <a href="{{ route('cardworkdetail.index', $row->id) }}" class="">Detail</a> </td>
                                         <td>
                                             <form action="{{ route('cardwork.destroy', $row->id) }}" method="POST">
                                                 @csrf

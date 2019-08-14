@@ -62,15 +62,23 @@ Route::group(['middleware' => ['auth']], function () {
         'show'
     ]);
 
-    Route::get('cardwork/{id}/detail', 'CardWorkController@detail')->name('cardwork.detail');
+    /* Route::get('cardwork/{id}/detail', 'CardWorkController@detail')->name('cardwork.detail');
     Route::post('cardwork/{id}/detail', 'CardWorkController@storeDetail')->name('cardwork.storedetail');
     Route::delete('cardwork/{id}/detail/delete', 'CardWorkController@destroyDetail')->name('cardwork.destroydetail');
     Route::get('cardwork/{id}/detail/edit', 'CardWorkController@editDetail')->name('cardwork.editdetail');
-    Route::put('cardwork/{id}/detail/update', 'CardWorkController@updateDetail')->name('cardwork.updatedetail');
+    Route::put('cardwork/{id}/detail/update', 'CardWorkController@updateDetail')->name('cardwork.updatedetail'); */
 
     Route::resource('cardwork', 'CardWorkController')->except([
         'show'
     ]);
+
+    Route::get('/cardworkdetail/{cardwork_id}', 'CardWorkDetailController@index')->name('cardworkdetail.index');
+    Route::get('/cardworkdetail/{cardwork_id}/{id}/edit', 'CardWorkDetailController@edit')->name('cardworkdetail.edit');
+
+    Route::resource('cardworkdetail', 'CardWorkDetailController')->except([
+        'create', 'show', 'index', 'edit'
+    ]);
+
 
     Route::resource('officer', 'OfficerController')->except([
         'show'
