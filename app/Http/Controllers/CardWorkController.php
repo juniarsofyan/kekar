@@ -8,6 +8,7 @@ use App\Project;
 use App\Inventory;
 use App\Process;
 use App\Customer;
+use App\Officer;
 use Illuminate\Http\Request;
 use DB;
 
@@ -26,7 +27,8 @@ class CardWorkController extends Controller
             ->join('processes', 'card_works.process_id', '=', 'processes.id')
             ->join('customers', 'card_works.customer_id', '=', 'customers.id')
             ->join('projects', 'card_works.project_id', '=', 'projects.id')
-            ->select('card_works.id', 'card_works.po_number', 'categories.name AS category', 'inventories.name AS inventory', 'processes.name AS proccess', 'customers.name AS customer', 'projects.code AS project')
+            ->join('officers', 'card_works.officer_id', '=', 'officers.id')
+            ->select('card_works.id', 'card_works.po_number', 'categories.name AS category', 'inventories.name AS inventory', 'processes.name AS proccess', 'customers.name AS customer', 'projects.code AS project', 'officers.name AS officer')
             ->get();
 
         return view('cardworks.index', compact('cardworks'));
@@ -44,8 +46,9 @@ class CardWorkController extends Controller
         $processes = Process::pluck('name', 'id');
         $customers = Customer::pluck('name', 'id');
         $projects = Project::pluck('code', 'id');
+        $officers = Officer::pluck('name', 'id');
 
-        return view('cardworks.create', compact('categories', 'inventories', 'processes', 'customers', 'projects'));
+        return view('cardworks.create', compact('categories', 'inventories', 'processes', 'customers', 'projects', 'officers'));
     }
 
     /**
@@ -64,7 +67,8 @@ class CardWorkController extends Controller
             'inventory' => 'required|string',
             'process' => 'required|string',
             'customer' => 'required|string',
-            'project' => 'required|string'
+            'project' => 'required|string',
+            'officer' => 'required|string'
         ]);
 
         try {
@@ -80,6 +84,7 @@ class CardWorkController extends Controller
                 'process_id' => $request->process,
                 'customer_id' => $request->customer,
                 'project_id' => $request->project,
+                'officer_id' => $request->officer,
                 'user_id' => \Auth::user()->id
             ]);
 
@@ -113,11 +118,12 @@ class CardWorkController extends Controller
         $processes = Process::pluck('name', 'id');
         $customers = Customer::pluck('name', 'id');
         $projects = Project::pluck('code', 'id');
+        $officers = Officer::pluck('name', 'id');
         $cardworks = CardWork::findOrFail($id);
 
         $cardworks->date = date('d/m/Y', strtotime($cardworks->date));
 
-        return view('cardworks.edit', compact('categories', 'inventories', 'processes', 'customers', 'projects', 'cardworks'));
+        return view('cardworks.edit', compact('categories', 'inventories', 'processes', 'customers', 'projects', 'cardworks', 'officers'));
     }
 
     /**
@@ -137,7 +143,8 @@ class CardWorkController extends Controller
             'inventory' => 'required|string',
             'process' => 'required|string',
             'customer' => 'required|string',
-            'project' => 'required|string'
+            'project' => 'required|string',
+            'officer' => 'required|string'
         ]);
 
         try {
@@ -157,6 +164,7 @@ class CardWorkController extends Controller
                 'process_id' => $request->process,
                 'customer_id' => $request->customer,
                 'project_id' => $request->project,
+                'officer_id' => $request->officer,
                 'user_id' => \Auth::user()->id
             ]);
 

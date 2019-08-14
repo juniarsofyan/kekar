@@ -92,6 +92,12 @@
                                 {!! Form::label('project', 'Project') !!}
                                 {!! Form::select('project', $projects, $cardworks->project_id, ['class' => 'form-control','placeholder' => '-- PILIH PROJECT --']) !!}
                             </div>
+
+                            <div class="form-group">
+                                {!! Form::label('officer', 'Petugas') !!}
+                                {!! Form::select('officer', $officers, $cardworks->officer_id, ['class' => 'form-control','placeholder' => '-- PILIH PETUGAS --']) !!}
+                            </div>
+
                         </div>
                         <!-- /.box-body -->
 

@@ -45,6 +45,7 @@
                                     <th>Proses</th>
                                     <th>Customer</th>
                                     <th>Project</th>
+                                    <th>Petugas</th>
                                     <th>Detail</th>
                                     <th>Opsi</th>
                                 </tr>
@@ -61,6 +62,7 @@
                                         <td>{{ $row->proccess }} </td>
                                         <td>{{ $row->customer }} </td>
                                         <td>{{ $row->project }} </td>
+                                        <td>{{ $row->officer }} </td>
                                         <td> <a href="{{ route('cardworkdetail.index', $row->id) }}" class="">Detail</a> </td>
                                         <td>
                                             <form action="{{ route('cardwork.destroy', $row->id) }}" method="POST">
@@ -73,7 +75,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="9" class="text-center">Tidak ada data</td>
+                                        <td colspan="10" class="text-center">Tidak ada data</td>
                                     </tr>
                                 @endforelse
 

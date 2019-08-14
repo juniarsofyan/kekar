@@ -91,6 +91,11 @@
                                 {!! Form::select('project', $projects, null, ['class' => 'form-control','placeholder' => '-- PILIH PROJECT --']) !!}
                             </div>
 
+                            <div class="form-group">
+                                {!! Form::label('officer', 'Petugas') !!}
+                                {!! Form::select('officer', $officers, null, ['class' => 'form-control','placeholder' => '-- PILIH PETUGAS --']) !!}
+                            </div>
+
                         </div>
                         <!-- /.box-body -->
 
