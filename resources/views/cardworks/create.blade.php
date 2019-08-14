@@ -63,7 +63,7 @@
 
                             <div class="form-group">
                                 {!! Form::label('category', 'Kategori') !!}
-                                {!! Form::select('category', $categories, null, ['class' => 'form-control','placeholder' => '-- PILIH KATEGORI --']) !!}
+                                {!! Form::select('category', $categories, null, ['required', 'class' => 'form-control','placeholder' => '-- PILIH KATEGORI --']) !!}
                             </div>
 
                             <div class="form-group">
@@ -73,27 +73,27 @@
 
                             <div class="form-group">
                                 {!! Form::label('inventory', 'Barang') !!}
-                                {!! Form::select('inventory', $inventories, null, ['class' => 'form-control','placeholder' => '-- PILIH BARANG --']) !!}
+                                {!! Form::select('inventory', $inventories, null, ['required', 'class' => 'form-control','placeholder' => '-- PILIH BARANG --']) !!}
                             </div>
 
                             <div class="form-group">
                                 {!! Form::label('process', 'Proses') !!}
-                                {!! Form::select('process', $processes, null, ['class' => 'form-control','placeholder' => '-- PILIH PROSES --']) !!}
+                                {!! Form::select('process', $processes, null, ['required', 'class' => 'form-control','placeholder' => '-- PILIH PROSES --']) !!}
                             </div>
 
                             <div class="form-group">
                                 {!! Form::label('customer', 'Customer') !!}
-                                {!! Form::select('customer', $customers, null, ['class' => 'form-control','placeholder' => '-- PILIH CUSTOMER --']) !!}
+                                {!! Form::select('customer', $customers, null, ['required', 'class' => 'form-control','placeholder' => '-- PILIH CUSTOMER --']) !!}
                             </div>
 
                             <div class="form-group">
                                 {!! Form::label('project', 'Project') !!}
-                                {!! Form::select('project', $projects, null, ['class' => 'form-control','placeholder' => '-- PILIH PROJECT --']) !!}
+                                {!! Form::select('project', $projects, null, ['required', 'class' => 'form-control','placeholder' => '-- PILIH PROJECT --']) !!}
                             </div>
 
                             <div class="form-group">
                                 {!! Form::label('officer', 'Petugas') !!}
-                                {!! Form::select('officer', $officers, null, ['class' => 'form-control','placeholder' => '-- PILIH PETUGAS --']) !!}
+                                {!! Form::select('officer', $officers, null, ['required', 'class' => 'form-control','placeholder' => '-- PILIH PETUGAS --']) !!}
                             </div>
 
                         </div>

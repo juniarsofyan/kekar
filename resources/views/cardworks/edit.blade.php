@@ -65,7 +65,7 @@
 
                             <div class="form-group">
                                 {!! Form::label('category', 'Kategori') !!}
-                                {!! Form::select('category', $categories, $cardworks->category_id, ['class' => 'form-control','placeholder' => '-- PILIH KATEGORI --']) !!}
+                                {!! Form::select('category', $categories, $cardworks->category_id, ['required', 'class' => 'form-control','placeholder' => '-- PILIH KATEGORI --']) !!}
                             </div>
 
                             <div class="form-group">
@@ -75,27 +75,27 @@
 
                             <div class="form-group">
                                 {!! Form::label('inventory', 'Barang') !!}
-                                {!! Form::select('inventory', $inventories, $cardworks->inventory_id, ['class' => 'form-control','placeholder' => '-- PILIH BARANG --']) !!}
+                                {!! Form::select('inventory', $inventories, $cardworks->inventory_id, ['required', 'class' => 'form-control','placeholder' => '-- PILIH BARANG --']) !!}
                             </div>
 
                             <div class="form-group">
                                 {!! Form::label('process', 'Proses') !!}
-                                {!! Form::select('process', $processes, $cardworks->process_id, ['class' => 'form-control','placeholder' => '-- PILIH PROSES --']) !!}
+                                {!! Form::select('process', $processes, $cardworks->process_id, ['required', 'class' => 'form-control','placeholder' => '-- PILIH PROSES --']) !!}
                             </div>
 
                             <div class="form-group">
                                 {!! Form::label('customer', 'Customer') !!}
-                                {!! Form::select('customer', $customers, $cardworks->customer_id, ['class' => 'form-control','placeholder' => '-- PILIH CUSTOMER --']) !!}
+                                {!! Form::select('customer', $customers, $cardworks->customer_id, ['required', 'class' => 'form-control','placeholder' => '-- PILIH CUSTOMER --']) !!}
                             </div>
 
                             <div class="form-group">
                                 {!! Form::label('project', 'Project') !!}
-                                {!! Form::select('project', $projects, $cardworks->project_id, ['class' => 'form-control','placeholder' => '-- PILIH PROJECT --']) !!}
+                                {!! Form::select('project', $projects, $cardworks->project_id, ['required', 'class' => 'form-control','placeholder' => '-- PILIH PROJECT --']) !!}
                             </div>
 
                             <div class="form-group">
                                 {!! Form::label('officer', 'Petugas') !!}
-                                {!! Form::select('officer', $officers, $cardworks->officer_id, ['class' => 'form-control','placeholder' => '-- PILIH PETUGAS --']) !!}
+                                {!! Form::select('officer', $officers, $cardworks->officer_id, ['required', 'class' => 'form-control','placeholder' => '-- PILIH PETUGAS --']) !!}
                             </div>
 
                         </div>
