@@ -79,8 +79,11 @@ Route::group(['middleware' => ['auth']], function () {
         'create', 'show', 'index', 'edit'
     ]);
 
-
     Route::resource('officer', 'OfficerController')->except([
         'show'
     ]);
+
+    Route::prefix('reports')->group(function () {
+        Route::get('/', 'ReportController@perProcess')->name('report.index');
+    });
 });
