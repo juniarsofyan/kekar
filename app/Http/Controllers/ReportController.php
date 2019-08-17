@@ -15,6 +15,20 @@ class ReportController extends Controller
         $category = isset($request->category) ? $request->category : false;
         $date_start = isset($request->date_start) ? $request->date_start : date('Y-m-01');
         $date_end = isset($request->date_end) ? $request->date_end : date('Y-m-d');
+        $category_where_clause = "";
+
+        // PREPARE PARAMETER BINDINGS
+        $parameter_bindings = array(
+            'date_start' => $date_start,
+            'date_end' => $date_end
+        );
+
+        // IF CATEGORY SELECTION IS NOT EMPTY
+        // ADD CATEGORY WHERE CLAUSE AND ITS PARAMETER BINDING
+        if (!empty($category)) {
+            $category_where_clause = "ctg.id = :category_id AND ";
+            $parameter_bindings = array('category_id' => $category) + $parameter_bindings;
+        }
 
         $query = "SELECT
                     cwm.`date`,
@@ -46,14 +60,12 @@ class ReportController extends Controller
                     customers cst
                     ON cwm.customer_id = cst.id
                 WHERE
+                    {$category_where_clause}
                     date BETWEEN :date_start AND :date_end
                     GROUP BY cwm.date, ctg.name, prc.name, inv.name, cst.name, prj.code
                     ORDER BY inv.name, cst.name ASC";
 
-        $results = DB::select(DB::raw($query), array(
-            'date_start' => $date_start,
-            'date_end' => $date_end
-        ));
+        $results = DB::select(DB::raw($query), $parameter_bindings);
 
         $categories = Category::pluck('name', 'id');
 

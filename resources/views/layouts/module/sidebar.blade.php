@@ -312,21 +312,23 @@
             </li>
             @endcan
 
-            {{-- <li class="treeview {{ (request()->routeIs('cardwork*')) ? 'active' : '' }}" >
-            <a href="#">
-                <span>Kartu Kerja</span>
-                <span class="pull-right-container">
-                    <i class="fa fa-angle-left pull-right"></i>
-                </span>
-            </a>
+            @can('Report By Category View')
+            <li class="treeview {{ (request()->routeIs('report*')) ? 'active' : '' }}">
+                <a href="#">
+                    <span>Laporan</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
 
-            <ul class="treeview-menu">
-                <li class="{{ (request()->routeIs('cardwork.index')) ? 'active' : '' }}"><a
-                        href="{{ route('cardwork.index') }}"><i class="fa fa-circle-o"></i> List</a></li>
-                <li class="{{ (request()->routeIs('cardwork.create')) ? 'active' : '' }}"><a
-                        href="{{ route('cardwork.create') }}"><i class="fa fa-circle-o"></i> Buat Baru</a></li>
-            </ul>
-            </li> --}}
+                <ul class="treeview-menu">
+                    @can('Report By Category View')
+                    <li class="{{ (request()->routeIs('report.bycategory')) ? 'active' : '' }}"><a
+                            href="{{ route('report.bycategory') }}"><i class="fa fa-circle-o"></i>Rkp. Kategori Perbaikan</a></li>
+                    @endcan
+                </ul>
+            </li>
+            @endcan
 
         </ul>
     </section>

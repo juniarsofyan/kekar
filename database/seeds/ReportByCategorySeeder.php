@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 
-class ProjectAndOfficerSeeder extends Seeder
+class ReportByCategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,14 +13,7 @@ class ProjectAndOfficerSeeder extends Seeder
     public function run()
     {
         $permissions = [
-            'Officer Create',
-            'Officer View',
-            'Officer Update',
-            'Officer Delete',
-            'Project Create',
-            'Project View',
-            'Project Update',
-            'Project Delete',
+            'Report By Category View'
         ];
 
         foreach ($permissions as $permission) {
