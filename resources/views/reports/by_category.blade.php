@@ -19,6 +19,50 @@
 
     <!-- Main content -->
     <section class="content">
+
+        <div class="filter">
+
+            @php
+
+                // echo "<pre>";
+                // var_dump(isset($filters['category']));
+                // var_dump($filters['category']);
+                // echo "</pre>";
+
+            @endphp
+
+            <form role="form" action="{{ route('report.bycategory') }}" method="GET">
+                @csrf
+                <div class="row">
+                    <div class="col-md-4 col-xs-12" style="padding-right:0;">
+                        <div class="form-group">
+                            {!! Form::label('category', 'Kategori') !!}
+                            {!! Form::select('category', $categories, $filters['category'] ? $filters['category'] : null, ['class' => 'form-control','placeholder' => '-- PILIH KATEGORI LAPORAN --']) !!}
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-xs-12" style="padding-right:0;">
+                        <div class="form-group">
+                            {!! Form::label('date_start', 'Tanggal Awal') !!}
+                            {!! Form::date('date_start', $filters['date_start'] ? $filters['date_start'] : null, ['class' => 'form-control','placeholder' => '-- DARI --']) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-xs-12" style="padding-right:0;">
+                        <div class="form-group">
+                            {!! Form::label('date_end', 'Tanggal Akhir') !!}
+                            {!! Form::date('date_end', $filters['date_end'] ? $filters['date_end'] : null, ['class' => 'form-control','placeholder' => '-- SAMPAI --']) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-xs-12">
+                        <div class="form-group">
+                            {!! Form::label(' ', '&nbsp;') !!}
+                            <button type="submit" class="btn btn-primary col-md-12 col-xs-12">Cari</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
         <div class="row">
             <!-- right column -->
             <div class="col-md-12">

@@ -84,6 +84,6 @@ Route::group(['middleware' => ['auth']], function () {
     ]);
 
     Route::prefix('reports')->group(function () {
-        Route::get('/', 'ReportController@perProcess')->name('report.index');
+        Route::get('/', 'ReportController@byCategory')->name('report.bycategory');
     });
 });

@@ -4,15 +4,17 @@ namespace App\Http\Controllers;
 
 use App\CardWork;
 use App\CardWorkDetail;
+use App\Category;
 use DB;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
 {
-    public function perProcess(Request $request)
+    public function byCategory(Request $request)
     {
-        $date_start = $request->date_start;
-        $date_end = $request->date_end;
+        $category = isset($request->category) ? $request->category : false;
+        $date_start = isset($request->date_start) ? $request->date_start : date('Y-m-01');
+        $date_end = isset($request->date_end) ? $request->date_end : date('Y-m-d');
 
         $query = "SELECT
                     cwm.`date`,
@@ -44,7 +46,7 @@ class ReportController extends Controller
                     customers cst
                     ON cwm.customer_id = cst.id
                 WHERE
-                    date BETWEEN '2019-01-01' AND '2019-08-31'
+                    date BETWEEN :date_start AND :date_end
                     GROUP BY cwm.date, ctg.name, prc.name, inv.name, cst.name, prj.code
                     ORDER BY inv.name, cst.name ASC";
 
@@ -53,6 +55,14 @@ class ReportController extends Controller
             'date_end' => $date_end
         ));
 
-        return view('reports.per_process', compact('results'));
+        $categories = Category::pluck('name', 'id');
+
+        $filters = array(
+            "category" => $category,
+            "date_start" => $date_start,
+            "date_end" => $date_end
+        );
+
+        return view('reports.by_category', compact('categories', 'results', 'filters'));
     }
 }
