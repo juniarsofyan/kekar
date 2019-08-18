@@ -1,7 +1,13 @@
 @extends('layouts.master')
 
 @section('title')
-<title>Manajemen Kategori</title>
+    <title>Manajemen Kategori</title>
+@endsection
+
+@section('styles')
+    <!-- DataTables -->
+    <link rel="stylesheet" href="{{ asset('bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/plugins/buttons.dataTables.min.css') }}">
 @endsection
 
 @section('content')
@@ -35,7 +41,7 @@
                             @endalert
                         @endif
 
-                        <table id="example1" class="table table-bordered table-striped">
+                        <table id="datatable-standard" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -66,7 +72,7 @@
                                         <td colspan="4" class="text-center">Tidak ada data</td>
                                     </tr>
                                 @endforelse
-                                
+
                             </tbody>
                         </table>
                     </div>
@@ -82,4 +88,18 @@
 </div>
 <!-- /.content-wrapper -->
 
+@endsection
+
+@section('scripts')
+    <!-- DataTables -->
+    <script src="{{ asset('bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/buttons.flash.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/jszip.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('js/plugins/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('js/plugins/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('js/datatable.js') }}"></script>
 @endsection
