@@ -228,7 +228,7 @@
             </li>
             @endcan
 
-            @can('Material View')
+            {{-- @can('Material View')
             <li class="treeview {{ (request()->routeIs('material*')) ? 'active' : '' }}">
                 <a href="#">
                     <span>Jenis Material</span>
@@ -247,7 +247,7 @@
                     @endcan
                 </ul>
             </li>
-            @endcan
+            @endcan --}}
 
             @can('Project View')
             <li class="treeview {{ (request()->routeIs('project*')) ? 'active' : '' }}">
