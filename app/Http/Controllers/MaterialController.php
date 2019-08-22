@@ -9,7 +9,7 @@ class MaterialController extends Controller
 {
     public function index()
     {
-        $materials = Material::orderBy('created_at', 'DESC')->paginate(10);
+        $materials = Material::orderBy('created_at', 'DESC')->get();
         return view('materials.index', compact('materials'));
     }
 

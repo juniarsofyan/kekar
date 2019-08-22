@@ -9,7 +9,7 @@ class ComponentController extends Controller
 {
     public function index()
     {
-        $components = Component::orderBy('created_at', 'DESC')->paginate(10);
+        $components = Component::orderBy('created_at', 'DESC')->get();
         return view('komponents.index', compact('components'));
     }
 

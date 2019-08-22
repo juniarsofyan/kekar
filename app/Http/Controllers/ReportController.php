@@ -69,12 +69,22 @@ class ReportController extends Controller
 
         $categories = Category::pluck('name', 'id');
 
+        $total_hours = array_sum(array_map(function ($item) {
+            return $item->total_hours;
+        }, $results));
+
+        $total_frequencies = array_sum(array_map(function ($item) {
+            return $item->frequency;
+        }, $results));
+
+        $total_processes = count($results);
+
         $filters = array(
             "category" => $category,
             "date_start" => $date_start,
             "date_end" => $date_end
         );
 
-        return view('reports.by_category', compact('categories', 'results', 'filters'));
+        return view('reports.by_category', compact('categories', 'results', 'filters', 'total_hours', 'total_frequencies', 'total_processes'));
     }
 }

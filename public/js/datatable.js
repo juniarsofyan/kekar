@@ -18,7 +18,7 @@ $(function () {
         "pageLength": 100,
         'lengthChange': false,
         'searching': true,
-        'ordering': true,
+        'ordering': false,
         'info': true,
         'autoWidth': true
     });

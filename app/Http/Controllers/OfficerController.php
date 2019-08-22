@@ -14,7 +14,7 @@ class OfficerController extends Controller
      */
     public function index()
     {
-        $officers = Officer::orderBy('created_at', 'DESC')->paginate(10);
+        $officers = Officer::orderBy('created_at', 'DESC')->get();
         return view('officers.index', compact('officers'));
     }
 

@@ -29,8 +29,8 @@
             <div class="col-md-12">
                 <!-- general form elements -->
                 <div class="box box-primary">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Tambah Kartu Kerja</h3>
+                    <div class="box-header with-border text-center">
+                        <h3 class="box-title" style="margin-top:1em;margin-bottom:1em;">Kartu Kerja</h3>
                     </div>
                     <!-- /.box-header -->
 
@@ -96,6 +96,42 @@
                                 {!! Form::select('officer', $officers, null, ['required', 'class' => 'form-control','placeholder' => '-- PILIH PETUGAS --']) !!}
                             </div>
 
+                            {{-- CARD WORK DETAIL --}}
+
+                            <div class="box-header with-border text-center">
+                                <h3 class="box-title" style="margin-top:1em;margin-bottom:1em;">Detail Kartu Kerja</h3>
+                            </div>
+
+                            <div class="form-group">
+                                {!! Form::label('component', 'Komponen') !!}
+                                {!! Form::select('component', $components, isset($cardwork_detail->component_id) ? $cardwork_detail->component_id : null, ['class' => 'form-control','placeholder' => '-- PILIH KOMPONEN --']) !!}
+                            </div>
+
+                            <div class="form-group">
+                                {!! Form::label('problem', 'Masalah') !!}
+                                {!! Form::textarea('problem', isset($cardwork_detail->problem) ? $cardwork_detail->problem : null, array('required', 'rows' => 4, 'cols' => 54, 'style' => 'resize:none', 'class'=>(($errors->has("problem")) ? "is-invalid":"").' form-control ')) !!}
+                            </div>
+
+                            <div class="form-group">
+                                {!! Form::label('solution', 'Pengerjaan') !!}
+                                {!! Form::textarea('solution', isset($cardwork_detail->solution) ? $cardwork_detail->solution : null, array('required', 'rows' => 4, 'cols' => 54, 'style' => 'resize:none', 'class'=>(($errors->has("solution")) ? "is-invalid":"").' form-control ')) !!}
+                            </div>
+
+                            <div class="form-group">
+                                {!! Form::label('total_hours', 'Total Jam') !!}
+                                <div class="input-group">
+                                    {!! Form::text('total_hours', isset($cardwork_detail->total_hours) ? $cardwork_detail->total_hours : null, array('required', 'class'=>(($errors->has("total_hours")) ? "is-invalid":"").' form-control ')) !!}
+                                    <span class="input-group-addon">Jam</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                {!! Form::label('qty', 'Qty') !!}
+                                <div class="input-group">
+                                    {!! Form::text('qty', isset($cardwork_detail->qty) ? $cardwork_detail->qty : null, array('required', 'class'=>(($errors->has("qty")) ? "is-invalid":"").' form-control ')) !!}
+                                    <span class="input-group-addon">Pcs</span>
+                                </div>
+                            </div>
                         </div>
                         <!-- /.box-body -->
 

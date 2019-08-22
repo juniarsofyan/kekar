@@ -60,11 +60,14 @@
             </form>
         </div>
 
+
+
+
         <div class="row">
             <!-- right column -->
             <div class="col-md-12">
                 <div class="box">
-                    <div class="box-header">
+                    <div class="box-header text-center">
                     <h3 class="box-title">Periode {{ date('d F Y', strtotime($filters['date_start'])) }} <small>s/d</small> {{ date('d F Y', strtotime($filters['date_end'])) }}</h3>
                     </div>
                     <!-- /.box-header -->
@@ -75,6 +78,46 @@
                                 {!! session('success') !!}
                             @endalert
                         @endif
+
+                        <div class="row">
+                            <!-- /.col -->
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="info-box bg-aqua">
+                                    <span class="info-box-icon"><i class="fa fa-files-o"></i></span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Total Proses</span>
+                                        <span class="info-box-number" style="font-size:2.5em;">{{ $total_processes }}</span>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="info-box bg-green">
+                                    <span class="info-box-icon"><i class="fa fa-clock-o"></i></span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Total Jam</span>
+                                        <span class="info-box-number" style="font-size:2.5em;">{{ $total_hours }}</span>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="info-box bg-yellow">
+                                    <span class="info-box-icon"><i class="fa fa-refresh"></i></span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">Total Frekuensi</span>
+                                        <span class="info-box-number" style="font-size:2.5em;">{{ $total_frequencies }}</span>
+                                    </div>
+                                    <!-- /.info-box-content -->
+                                </div>
+                                <!-- /.info-box -->
+                            </div>
+                            <!-- /.col -->
+                        </div>
 
                         <table id="datatable-full" class="table table-bordered table-striped">
                             <thead>

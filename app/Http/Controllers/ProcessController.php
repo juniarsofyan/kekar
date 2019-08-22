@@ -9,7 +9,7 @@ class ProcessController extends Controller
 {
     public function index()
     {
-        $processes = Process::orderBy('created_at', 'DESC')->paginate(10);
+        $processes = Process::orderBy('created_at', 'DESC')->get();
         return view('processes.index', compact('processes'));
     }
 

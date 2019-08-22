@@ -9,7 +9,7 @@ class InventoryController extends Controller
 {
     public function index()
     {
-        $inventories = Inventory::orderBy('created_at', 'DESC')->paginate(10);
+        $inventories = Inventory::orderBy('created_at', 'DESC')->get();
         return view('inventories.index', compact('inventories'));
     }
 

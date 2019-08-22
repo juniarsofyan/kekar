@@ -324,7 +324,7 @@
                 <ul class="treeview-menu">
                     @can('Report By Category View')
                     <li class="{{ (request()->routeIs('report.bycategory')) ? 'active' : '' }}"><a
-                            href="{{ route('report.bycategory') }}"><i class="fa fa-circle-o"></i>Rkp. Kategori Perbaikan</a></li>
+                            href="{{ route('report.bycategory') }}"><i class="fa fa-circle-o text-aqua"></i>Laporan</a></li>
                     @endcan
                 </ul>
             </li>

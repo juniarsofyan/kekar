@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\CardWork;
+use App\Component;
 use App\Category;
 use App\Project;
 use App\Inventory;
@@ -28,7 +29,10 @@ class CardWorkController extends Controller
             ->join('customers', 'card_works.customer_id', '=', 'customers.id')
             ->join('projects', 'card_works.project_id', '=', 'projects.id')
             ->join('officers', 'card_works.officer_id', '=', 'officers.id')
-            ->select('card_works.id', 'card_works.po_number', 'categories.name AS category', 'inventories.name AS inventory', 'processes.name AS proccess', 'customers.name AS customer', 'projects.code AS project', 'officers.name AS officer')
+            ->join('card_work_details', 'card_works.id', '=', 'card_work_details.card_work_id')
+            ->join('components', 'card_work_details.component_id', '=', 'components.id')
+            ->select('card_works.id', 'card_works.date', 'card_works.po_number', 'categories.name AS category', 'inventories.name AS inventory', 'processes.name AS proccess', 'customers.name AS customer', 'projects.code AS project', 'officers.name AS officer', 'components.name AS component', 'card_work_details.problem', 'card_work_details.solution', 'card_work_details.total_hours', 'card_work_details.qty')
+            ->orderBy('card_works.date', 'desc')
             ->get();
 
         return view('cardworks.index', compact('cardworks'));
@@ -41,14 +45,15 @@ class CardWorkController extends Controller
      */
     public function create()
     {
-        $categories = Category::pluck('name', 'id');
-        $inventories = Inventory::pluck('name', 'id');
-        $processes = Process::pluck('name', 'id');
-        $customers = Customer::pluck('name', 'id');
-        $projects = Project::pluck('code', 'id');
-        $officers = Officer::pluck('name', 'id');
+        $categories = Category::orderBy('name', 'asc')->pluck('name', 'id');
+        $inventories = Inventory::orderBy('name', 'asc')->pluck('name', 'id');
+        $processes = Process::orderBy('name', 'asc')->pluck('name', 'id');
+        $customers = Customer::orderBy('name', 'asc')->pluck('name', 'id');
+        $projects = Project::orderBy('code', 'asc')->pluck('code', 'id');
+        $officers = Officer::orderBy('name', 'asc')->pluck('name', 'id');
+        $components = Component::orderBy('name', 'asc')->pluck('name', 'id');
 
-        return view('cardworks.create', compact('categories', 'inventories', 'processes', 'customers', 'projects', 'officers'));
+        return view('cardworks.create', compact('categories', 'inventories', 'processes', 'customers', 'projects', 'officers', 'components'));
     }
 
     /**
@@ -68,7 +73,12 @@ class CardWorkController extends Controller
             'process' => 'required|string',
             'customer' => 'required|string',
             'project' => 'required|string',
-            'officer' => 'required|string'
+            'officer' => 'required|string',
+            'component' => 'required|integer',
+            'problem' => 'required|string',
+            'solution' => 'required|string',
+            'total_hours' => 'required|integer',
+            'qty' => 'required|integer',
         ]);
 
         try {
@@ -76,7 +86,7 @@ class CardWorkController extends Controller
             $request->date = str_replace('/', '-', $request->date);
             $request->date = date('Y-m-d', strtotime($request->date));
 
-            $cardworks = CardWork::firstOrCreate([
+            $cardwork = CardWork::firstOrCreate([
                 'date' => $request->date,
                 'category_id' => $request->category,
                 'po_number' => $request->po_number,
@@ -88,7 +98,15 @@ class CardWorkController extends Controller
                 'user_id' => \Auth::user()->id
             ]);
 
-            return redirect()->route('cardwork.index')->with(['success' => 'Kartu Kerja: ' . $cardworks->name . ' Ditambahkan']);
+            $cardwork->cardWorkDetails()->create([
+                'component_id' => $request->component,
+                'problem' => $request->problem,
+                'solution' => $request->solution,
+                'total_hours' => $request->total_hours,
+                'qty' => $request->qty
+            ]);
+
+            return redirect()->route('cardwork.index')->with(['success' => 'Kartu Kerja Ditambahkan']);
         } catch (\Exception $e) {
             return redirect()->back()->with(['error' => $e->getMessage()]);
         }
@@ -113,17 +131,24 @@ class CardWorkController extends Controller
      */
     public function edit($id)
     {
+
+        $cardworks = DB::table('card_works')
+            ->join('card_work_details', 'card_works.id', '=', 'card_work_details.card_work_id')
+            ->select('card_works.id', 'card_works.date', 'card_works.category_id', 'card_works.po_number', 'card_works.inventory_id', 'card_works.process_id', 'card_works.customer_id', 'card_works.project_id', 'card_works.officer_id', 'card_work_details.component_id', 'card_work_details.problem', 'card_work_details.solution', 'card_work_details.total_hours', 'card_work_details.qty')
+            ->where('card_works.id', $id)
+            ->first();
+
+        $cardworks->date = date('d/m/Y', strtotime($cardworks->date));
         $categories = Category::pluck('name', 'id');
         $inventories = Inventory::pluck('name', 'id');
         $processes = Process::pluck('name', 'id');
         $customers = Customer::pluck('name', 'id');
         $projects = Project::pluck('code', 'id');
         $officers = Officer::pluck('name', 'id');
-        $cardworks = CardWork::findOrFail($id);
+        $components = Component::pluck('name', 'id');
 
-        $cardworks->date = date('d/m/Y', strtotime($cardworks->date));
 
-        return view('cardworks.edit', compact('categories', 'inventories', 'processes', 'customers', 'projects', 'cardworks', 'officers'));
+        return view('cardworks.edit', compact('categories', 'inventories', 'processes', 'customers', 'projects', 'cardworks', 'officers', 'components'));
     }
 
     /**
@@ -184,8 +209,10 @@ class CardWorkController extends Controller
      */
     public function destroy($id)
     {
-        $cardworks = CardWork::findOrFail($id);
-        $cardworks->delete();
+        $cardwork = CardWork::findOrFail($id);
+        $cardwork->cardWorkDetails()->delete();
+        $cardwork->delete();
+
         return redirect()->back()->with(['success' => "Kartu Kerja telah dihapus!"]);
     }
 }

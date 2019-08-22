@@ -74,20 +74,6 @@
                                         {!! Form::select('component', $components, isset($cardwork_detail->component_id) ? $cardwork_detail->component_id : null, ['class' => 'form-control','placeholder' => '-- PILIH KOMPONEN --']) !!}
                                     </div>
                                 </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        {!! Form::label('material', 'Jenis Material') !!}
-                                        {!! Form::select('material', $materials, isset($cardwork_detail->material_id) ? $cardwork_detail->material_id : null, ['class' => 'form-control','placeholder' => '-- PILIH JENIS MATERIAL --']) !!}
-                                    </div>
-                                </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        {!! Form::label('dimension', 'Dimensi') !!}
-                                        {!! Form::text('dimension', isset($cardwork_detail->dimension) ? $cardwork_detail->dimension : null, array('class'=>(($errors->has("dimension")) ? "is-invalid":"").' form-control ')) !!}
-                                    </div>
-                                </div>
                             </div>
 
                             <div class="row">
@@ -126,18 +112,7 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        {!! Form::label('weight', 'Berat') !!}
-                                        <div class="input-group">
-                                            {!! Form::text('weight', isset($cardwork_detail->weight) ? $cardwork_detail->weight : null, array('class'=>(($errors->has("weight")) ? "is-invalid":"").' form-control ')) !!}
-                                            <span class="input-group-addon">KG</span>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
-
                         </div>
                         <!-- /.box-body -->
 
