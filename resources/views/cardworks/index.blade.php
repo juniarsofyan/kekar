@@ -25,6 +25,47 @@
 
     <!-- Main content -->
     <section class="content">
+
+        <div class="filter">
+            <form role="form" action="{{ route('cardwork.index') }}" method="GET">
+                @csrf
+                <div class="row">
+                    <div class="col-md-3 col-xs-12" style="padding-right:0;">
+                        <div class="form-group">
+                            {!! Form::label('category', 'Pilih kategori laporan') !!}
+                            {!! Form::select('category', $categories, $filters['category'] ? $filters['category'] : null, ['class' => 'form-control','placeholder' => '-- SEMUA KATEGORI --']) !!}
+                        </div>
+                    </div>
+
+                    <div class="col-md-3 col-xs-12" style="padding-right:0;">
+                        <div class="form-group">
+                            {!! Form::label('customer', 'Pilih customer') !!}
+                            {!! Form::select('customer', $customers, $filters['customer'] ? $filters['customer'] : null, ['class' => 'form-control','placeholder' => '-- SEMUA CUSTOMER --']) !!}
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 col-xs-12" style="padding-right:0;">
+                        <div class="form-group">
+                            {!! Form::label('date_start', 'Tanggal awal') !!}
+                            {!! Form::date('date_start', $filters['date_start'] ? $filters['date_start'] : null, ['class' => 'form-control','placeholder' => '-- DARI --']) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-xs-12" style="padding-right:0;">
+                        <div class="form-group">
+                            {!! Form::label('date_end', 'Tanggal akhir') !!}
+                            {!! Form::date('date_end', $filters['date_end'] ? $filters['date_end'] : null, ['class' => 'form-control','placeholder' => '-- SAMPAI --']) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-xs-12">
+                        <div class="form-group">
+                            {!! Form::label(' ', '&nbsp;') !!}
+                            <button type="submit" class="btn btn-primary col-md-12 col-xs-12">Cari</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
         <div class="row">
             <!-- right column -->
             <div class="col-md-12">
@@ -41,7 +82,7 @@
                             @endalert
                         @endif
 
-                        <table id="datatable-standard" class="table table-bordered table-striped">
+                        <table id="datatable-full" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -63,7 +104,13 @@
                             </thead>
                             <tbody>
 
-                                @php $no = 1; @endphp
+                                @php $no = 1;
+
+                                    // echo "<pre>";
+                                    // print_r ($cardworks);
+                                    // echo "</pre>";
+                                    // exit();
+                                @endphp
                                 @forelse ($cardworks as $row)
                                     <tr>
                                         <td>{{ $no++ }}</td>
@@ -91,7 +138,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="10" class="text-center">Tidak ada data</td>
+                                        <td colspan="15" class="text-center">Tidak ada data</td>
                                     </tr>
                                 @endforelse
 

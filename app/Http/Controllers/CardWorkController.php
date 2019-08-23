@@ -20,8 +20,21 @@ class CardWorkController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $category = isset($request->category) ? $request->category : false;
+        $customer = isset($request->customer) ? $request->customer : false;
+        $date_start = isset($request->date_start) ? $request->date_start : date('Y-m-01');
+        $date_end = isset($request->date_end) ? $request->date_end : date('Y-m-d');
+        $category_where_clause = "";
+        $customer_where_clause = "";
+
+        // PREPARE PARAMETER BINDINGS
+        $parameter_bindings = array(
+            'date_start' => $date_start,
+            'date_end' => $date_end
+        );
+
         $cardworks = DB::table('card_works')
             ->join('categories', 'card_works.category_id', '=', 'categories.id')
             ->join('inventories', 'card_works.inventory_id', '=', 'inventories.id')
@@ -32,10 +45,34 @@ class CardWorkController extends Controller
             ->join('card_work_details', 'card_works.id', '=', 'card_work_details.card_work_id')
             ->join('components', 'card_work_details.component_id', '=', 'components.id')
             ->select('card_works.id', 'card_works.date', 'card_works.po_number', 'categories.name AS category', 'inventories.name AS inventory', 'processes.name AS proccess', 'customers.name AS customer', 'projects.code AS project', 'officers.name AS officer', 'components.name AS component', 'card_work_details.problem', 'card_work_details.solution', 'card_work_details.total_hours', 'card_work_details.qty')
-            ->orderBy('card_works.date', 'desc')
-            ->get();
+            ->whereBetween('date', [$date_start, $date_end]);
 
-        return view('cardworks.index', compact('cardworks'));
+        // IF CATEGORY SELECTION IS NOT EMPTY
+        // ADD CATEGORY WHERE CLAUSE AND ITS PARAMETER BINDING
+        if (!empty($category)) {
+            $cardworks->where('card_works.category_id', $category);
+        }
+
+        // IF CUSTOMER SELECTION IS NOT EMPTY
+        // ADD CUSTOMER WHERE CLAUSE AND ITS PARAMETER BINDING
+        if (!empty($customer)) {
+            $cardworks->where('card_works.customer_id', $customer);
+        }
+
+        $cardworks->orderBy('card_works.date', 'desc');
+        $cardworks = $cardworks->get();
+
+        $categories = Category::pluck('name', 'id');
+        $customers = Customer::pluck('name', 'id');
+
+        $filters = array(
+            "category" => $category,
+            "customer" => $customer,
+            "date_start" => $date_start,
+            "date_end" => $date_end
+        );
+
+        return view('cardworks.index', compact('cardworks', 'categories', 'customers', 'filters'));
     }
 
     /**
