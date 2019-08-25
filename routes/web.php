@@ -86,4 +86,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::prefix('reports')->group(function () {
         Route::get('/', 'ReportController@byCategory')->name('report.bycategory');
     });
+
+    Route::prefix('dashboards')->group(function () {
+        Route::get('/total-hours-per-category', 'DashboardController@index')->name('dashboard.index');
+    });
 });
