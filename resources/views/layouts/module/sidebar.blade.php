@@ -41,7 +41,7 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="index.html"><i class="fa fa-circle-o text-warning"></i> Dashboard</a></li>
+                    <li><a href="{{ route('dashboard.index') }}"><i class="fa fa-circle-o text-warning"></i> Dashboard</a></li>
                 </ul>
             </li>
 
