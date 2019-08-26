@@ -82,68 +82,70 @@
                             @endalert
                         @endif
 
-                        <table id="datatable-full" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Tanggal</th>
-                                    <th>Kategori</th>
-                                    <th>Nomor PO</th>
-                                    <th>Barang</th>
-                                    <th>Proses</th>
-                                    <th>Customer</th>
-                                    <th>Project</th>
-                                    <th>Petugas</th>
-                                    <th>Komponen</th>
-                                    <th>Masalah</th>
-                                    <th>Pengerjaan</th>
-                                    <th>Jam</th>
-                                    <th>Qty</th>
-                                    <th>Opsi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                @php $no = 1;
-
-                                    // echo "<pre>";
-                                    // print_r ($cardworks);
-                                    // echo "</pre>";
-                                    // exit();
-                                @endphp
-                                @forelse ($cardworks as $row)
+                        <div class="table-responsive">
+                            <table id="datatable-full" class="table table-bordered table-striped">
+                                <thead>
                                     <tr>
-                                        <td>{{ $no++ }}</td>
-                                        <td>{{ date('d M Y', strtotime($row->date)) }} </td>
-                                        <td>{{ $row->category }} </td>
-                                        <td>{{ $row->po_number }} </td>
-                                        <td>{{ $row->inventory }} </td>
-                                        <td>{{ $row->proccess }} </td>
-                                        <td>{{ str_limit($row->customer, 10) }} </td>
-                                        <td>{{ $row->project }} </td>
-                                        <td>{{ $row->officer }} </td>
-                                        <td>{{ $row->component }} </td>
-                                        <td>{{ $row->problem }} </td>
-                                        <td>{{ $row->solution }} </td>
-                                        <td>{{ $row->total_hours }} </td>
-                                        <td>{{ $row->qty }} </td>
-                                        <td>
-                                            <a href="{{ route('cardwork.edit', $row->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
-                                            <form action="{{ route('cardwork.destroy', $row->id) }}" method="POST">
-                                                @csrf
-                                                <input type="hidden" name="_method" value="DELETE">
-                                                <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
-                                            </form>
-                                        </td>
+                                        <th>#</th>
+                                        <th>Tanggal</th>
+                                        <th>Kategori</th>
+                                        <th>Nomor PO</th>
+                                        <th>Barang</th>
+                                        <th>Proses</th>
+                                        <th>Customer</th>
+                                        <th>Project</th>
+                                        <th>Petugas</th>
+                                        <th>Komponen</th>
+                                        <th>Masalah</th>
+                                        <th>Pengerjaan</th>
+                                        <th>Jam</th>
+                                        <th>Qty</th>
+                                        <th>Opsi</th>
                                     </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="15" class="text-center">Tidak ada data</td>
-                                    </tr>
-                                @endforelse
+                                </thead>
+                                <tbody>
 
-                            </tbody>
-                        </table>
+                                    @php $no = 1;
+
+                                        // echo "<pre>";
+                                        // print_r ($cardworks);
+                                        // echo "</pre>";
+                                        // exit();
+                                    @endphp
+                                    @forelse ($cardworks as $row)
+                                        <tr>
+                                            <td>{{ $no++ }}</td>
+                                            <td>{{ date('d M Y', strtotime($row->date)) }} </td>
+                                            <td>{{ $row->category }} </td>
+                                            <td>{{ $row->po_number }} </td>
+                                            <td>{{ $row->inventory }} </td>
+                                            <td>{{ $row->proccess }} </td>
+                                            <td>{{ str_limit($row->customer, 10) }} </td>
+                                            <td>{{ $row->project }} </td>
+                                            <td>{{ $row->officer }} </td>
+                                            <td>{{ $row->component }} </td>
+                                            <td>{{ $row->problem }} </td>
+                                            <td>{{ $row->solution }} </td>
+                                            <td>{{ $row->total_hours }} </td>
+                                            <td>{{ $row->qty }} </td>
+                                            <td>
+                                                <a href="{{ route('cardwork.edit', $row->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>
+                                                <form action="{{ route('cardwork.destroy', $row->id) }}" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="15" class="text-center">Tidak ada data</td>
+                                        </tr>
+                                    @endforelse
+
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <!-- /.box-body -->
                 </div>
