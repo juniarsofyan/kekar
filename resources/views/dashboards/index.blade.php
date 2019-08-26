@@ -6,8 +6,7 @@
 
 @section('styles')
 <!-- DataTables -->
-<link rel="stylesheet" href="{{ asset('bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
-<link rel="stylesheet" href="{{ asset('css/plugins/buttons.dataTables.min.css') }}">
+<link rel="stylesheet" href="{{ asset('bower_components/morris.js/morris.css') }}">
 @endsection
 
 @section('content')
@@ -32,53 +31,90 @@
                 "bg-green",
                 "bg-yellow",
                 "bg-red"
-            );
+                );
         @endphp
 
         <!-- Small boxes (Stat box) -->
         <div class="row">
 
             @forelse ($total_hours as $key => $row)
-                <div class="col-lg-3 col-xs-6">
-                    <div class="small-box {{ $colors[$key] }}">
-                        <div class="inner">
-                            <h3>{{ $row->total_hours}} Jam</h3>
-                            <p>{{ $row->category}}</p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-clock"></i>
-                        </div>
+            <div class="col-lg-3 col-xs-6">
+                <div class="small-box {{ $colors[$key] }}">
+                    <div class="inner">
+                        <h3>{{ $row->total_hours}} Jam</h3>
+                        <p>{{ $row->category}}</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-clock"></i>
                     </div>
                 </div>
+            </div>
             @empty
-                <div class="col-lg-12 col-xs-12">
-                    <div class="small-box bg-red">
-                        <div class="inner text-center">
-                            <p>Tidak ada data</p>
-                        </div>
+            <div class="col-lg-12 col-xs-12">
+                <div class="small-box bg-red">
+                    <div class="inner text-center">
+                        <p>Tidak ada data</p>
                     </div>
                 </div>
+            </div>
             @endforelse
 
         </div>
         <!-- /.row -->
-    </section>
-    <!-- /.content -->
+
+        <div class="row">
+            <div class="col-lg-12 col-xs-12">
+
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Jumlah Kartu Kerja Per-Bulan</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+
+                        @if (session('success'))
+                            @alert(['type' => 'success'])
+                                {!! session('success') !!}
+                            @endalert
+                        @endif
+
+                        <div class="chart tab-pane active" id="cardwork-chart" style="position: relative; height: 300px;"> </div>
+
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+            <!-- /.nav-tabs-custom -->
+        </div>
+</div>
+</section>
+<!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
 
 @endsection
 
+
+
 @section('scripts')
-<!-- DataTables -->
-<script src="{{ asset('bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
-<script src="{{ asset('js/plugins/dataTables.buttons.min.js') }}"></script>
-<script src="{{ asset('js/plugins/buttons.flash.min.js') }}"></script>
-<script src="{{ asset('js/plugins/jszip.min.js') }}"></script>
-<script src="{{ asset('js/plugins/pdfmake.min.js') }}"></script>
-<script src="{{ asset('js/plugins/vfs_fonts.js') }}"></script>
-<script src="{{ asset('js/plugins/buttons.html5.min.js') }}"></script>
-<script src="{{ asset('js/plugins/buttons.print.min.js') }}"></script>
-<script src="{{ asset('js/datatable.js') }}"></script>
+<!-- Morris.js charts -->
+<script src="{{ asset('bower_components/raphael/raphael.min.js') }}"></script>
+<script src="{{ asset('bower_components/morris.js/morris.min.js') }}"></script>
+<script>
+    $(function () {
+
+    var area = new Morris.Area({
+        element: 'cardwork-chart',
+        resize: true,
+        data: {!! json_encode($total_card_works) !!},
+        xkey: 'month',
+        ykeys: ['total'],
+        labels: ['Kartu Kerja'],
+        lineColors: ['#a0d0e0'],
+        hideHover: 'auto'
+    });
+
+})
+
+</script>
 @endsection

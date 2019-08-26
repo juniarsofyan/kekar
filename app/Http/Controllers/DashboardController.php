@@ -22,10 +22,16 @@ class DashboardController extends Controller
             ->get();
 
         $total_card_works = DB::table('card_works')
-            ->select(DB::raw('count(card_works.id) as total_card_works'), DB::raw('YEAR(date) year, MONTH(date) month'))
+            ->select(DB::raw('MONTH(date) month'), DB::raw('count(card_works.id) as total'))
             ->whereBetween('date', [$date_start, $date_end])
-            ->groupby('year', 'month')
+            ->groupby('month')
             ->get();
+
+        foreach ($total_card_works as $key => $value) {
+            $total_card_works{
+                $key}->month = date('F', mktime(0, 0, 0, $value->month, 10));
+        }
+
 
         return view('dashboards.index', compact('total_hours', 'total_card_works'));
     }
