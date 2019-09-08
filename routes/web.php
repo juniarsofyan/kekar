@@ -19,9 +19,14 @@ use App\CardWork;
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('home', function () {
+    return redirect('/');
+});
 
 Route::group(['middleware' => ['auth']], function () {
+
+    Route::get('/', 'DashboardController@index')->name('dashboard.index');
+
     Route::resource('category', 'CategoryController')->except([
         'show'
     ]);
@@ -85,9 +90,5 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::prefix('reports')->group(function () {
         Route::get('/', 'ReportController@byCategory')->name('report.bycategory');
-    });
-
-    Route::prefix('dashboards')->group(function () {
-        Route::get('/total-hours-per-category', 'DashboardController@index')->name('dashboard.index');
     });
 });
