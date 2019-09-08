@@ -9,7 +9,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $date_start = date('Y-m-01');
+        $date_start = date('Y-01-01');
         $date_end = date('Y-m-d');
 
         $total_hours = DB::table('card_work_details')

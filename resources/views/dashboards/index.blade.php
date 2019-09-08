@@ -106,6 +106,7 @@
     var area = new Morris.Area({
         element: 'cardwork-chart',
         resize: true,
+        parseTime:false,
         data: {!! json_encode($total_card_works) !!},
         xkey: 'month',
         ykeys: ['total'],
