@@ -41,7 +41,6 @@ class ReportController extends Controller
         }
 
         $query = "SELECT
-                    cwm.`date`,
                     ctg.name as category,
                     inv.name as inventory,
                     prj.code as project,
@@ -73,7 +72,7 @@ class ReportController extends Controller
                     {$category_where_clause}
                     {$customer_where_clause}
                     date BETWEEN :date_start AND :date_end
-                    GROUP BY cwm.date, ctg.name, prc.name, inv.name, cst.name, prj.code
+                    GROUP BY ctg.name, prc.name, inv.name, cst.name, prj.code
                     ORDER BY inv.name, cst.name ASC";
 
         $results = DB::select(DB::raw($query), $parameter_bindings);
